@@ -1,0 +1,87 @@
+:root {
+  /* Primary gradient */
+  --primary-start: #7C3AED;
+  --primary-end: #2563EB;
+  --primary: #6D28D9;
+
+  /* Background (dark mode default) */
+  --bg-primary: #0F0F1A;
+  --bg-secondary: #1A1A2E;
+  --bg-card: #16213E;
+  --bg-card-hover: #1E2A4A;
+
+  /* Glass effect */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-bg-strong: rgba(255, 255, 255, 0.08);
+
+  /* Text */
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+
+  /* Accent */
+  --accent-green: #10B981;
+  --accent-orange: #F59E0B;
+  --accent-red: #EF4444;
+  --accent-pink: #EC4899;
+
+  /* Download button */
+  --download-gradient-start: #10B981;
+  --download-gradient-end: #059669;
+
+  /* Category colors */
+  --cat-trending: #EF4444;
+  --cat-lucu: #F59E0B;
+  --cat-islami: #10B981;
+  --cat-anime: #EC4899;
+  --cat-emak: #F97316;
+  --cat-daerah: #8B5CF6;
+  --cat-horror: #6B7280;
+  --cat-motivasi: #3B82F6;
+  --cat-gebetan: #F43F5E;
+  --cat-jingle: #14B8A6;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Border radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Font */
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Outfit', 'Inter', sans-serif;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 20px rgba(124, 58, 237, 0.3);
+  --shadow-glow-strong: 0 0 40px rgba(124, 58, 237, 0.4);
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Z-index */
+  --z-dropdown: 100;
+  --z-navbar: 200;
+  --z-player: 300;
+  --z-modal: 400;
+
+  /* Container */
+  --container-max: 1200px;
+  --navbar-height: 64px;
+  --player-height: 72px;
+}
