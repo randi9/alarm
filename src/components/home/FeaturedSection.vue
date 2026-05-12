@@ -9,9 +9,9 @@
           :to="`/ringtone/${ringtone.id}`"
           class="featured__card"
         >
-          <div class="featured__card-bg" :style="{ '--cat-color': getCatColor(ringtone.category) }"></div>
+          <div class="featured__card-bg" :style="{ '--cat-color': ringtone.category_color || '#6D28D9' }"></div>
           <div class="featured__card-content">
-            <Icon :icon="getCatIcon(ringtone.category)" class="featured__cat-icon" :style="{ color: getCatColor(ringtone.category) }" />
+            <Icon :icon="ringtone.category_icon || 'mdi:music-note'" class="featured__cat-icon" :style="{ color: ringtone.category_color || '#6D28D9' }" />
             <h3 class="featured__title">{{ ringtone.title }}</h3>
             <p class="featured__desc">{{ ringtone.description }}</p>
             <div class="featured__meta">
@@ -30,23 +30,30 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import { Icon } from '@iconify/vue'
-import { getFeaturedRingtones, formatDownloads, type Ringtone } from '../../data/ringtones'
-import { getCategoryBySlug } from '../../data/categories'
+import { api } from '../../services/api'
 import { useAudioPlayer } from '../../composables/useAudioPlayer'
 
-const featuredRingtones = getFeaturedRingtones().slice(0, 3)
+const featuredRingtones = ref<any[]>([])
 const { play } = useAudioPlayer()
 
-function getCatColor(slug: string): string {
-  return getCategoryBySlug(slug)?.color || '#6D28D9'
+onMounted(async () => {
+  const res = await api.getRingtones({ featured: true, limit: 3 })
+  if (res.success) {
+    featuredRingtones.value = res.data
+  }
+})
+
+function formatDownloads(count: number): string {
+  if (!count) return '0'
+  if (count >= 1000) {
+    return (count / 1000).toFixed(1).replace(/\.0$/, '') + 'K'
+  }
+  return count.toString()
 }
 
-function getCatIcon(slug: string): string {
-  return getCategoryBySlug(slug)?.icon || 'mdi:music-note'
-}
-
-function handlePlay(ringtone: Ringtone) {
+function handlePlay(ringtone: any) {
   play(ringtone)
 }
 </script>

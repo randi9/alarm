@@ -1,5 +1,5 @@
 import { ref, computed, watch } from 'vue'
-import { ringtones } from '../data/ringtones'
+import { api } from '../services/api'
 
 export type SortOption = 'terbaru' | 'terpopuler' | 'rating'
 
@@ -10,6 +10,40 @@ export function useSearch() {
   const debounceTimer = ref<ReturnType<typeof setTimeout> | null>(null)
   const debouncedQuery = ref('')
 
+  const ringtones = ref<any[]>([])
+  const isLoading = ref(false)
+
+  // Fetch ringtones based on current filters
+  const fetchRingtones = async () => {
+    isLoading.value = true
+    try {
+      const sortMap: Record<string, string> = {
+        'terbaru': 'newest',
+        'terpopuler': 'downloads',
+        'rating': 'rating'
+      }
+
+      const res = await api.getRingtones({
+        q: debouncedQuery.value || undefined,
+        category: selectedCategory.value || undefined,
+        sort: sortMap[sortBy.value],
+        limit: 50 // Adjust as needed
+      })
+      if (res.success) {
+        ringtones.value = res.data
+      }
+    } catch (err) {
+      console.error('Failed to fetch ringtones:', err)
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  // Watch for changes that should trigger a re-fetch
+  watch([debouncedQuery, selectedCategory, sortBy], () => {
+    fetchRingtones()
+  }, { immediate: true })
+
   // Debounce search
   watch(query, (newVal) => {
     if (debounceTimer.value) clearTimeout(debounceTimer.value)
@@ -18,39 +52,7 @@ export function useSearch() {
     }, 300)
   })
 
-  const filteredRingtones = computed(() => {
-    let result = [...ringtones]
-
-    // Filter by search query
-    if (debouncedQuery.value) {
-      const q = debouncedQuery.value.toLowerCase()
-      result = result.filter(r =>
-        r.title.toLowerCase().includes(q) ||
-        r.description.toLowerCase().includes(q) ||
-        r.tags.some(t => t.toLowerCase().includes(q))
-      )
-    }
-
-    // Filter by category
-    if (selectedCategory.value) {
-      result = result.filter(r => r.category === selectedCategory.value)
-    }
-
-    // Sort
-    switch (sortBy.value) {
-      case 'terbaru':
-        result.sort((a, b) => new Date(b.dateAdded).getTime() - new Date(a.dateAdded).getTime())
-        break
-      case 'terpopuler':
-        result.sort((a, b) => b.downloads - a.downloads)
-        break
-      case 'rating':
-        result.sort((a, b) => b.rating - a.rating)
-        break
-    }
-
-    return result
-  })
+  const filteredRingtones = computed(() => ringtones.value)
 
   function clearSearch() {
     query.value = ''
@@ -71,6 +73,7 @@ export function useSearch() {
     selectedCategory,
     sortBy,
     filteredRingtones,
+    isLoading,
     clearSearch,
     setCategory,
     clearCategory

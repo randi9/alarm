@@ -14,19 +14,24 @@
             <p class="detail-info__desc">{{ ringtone.description }}</p>
 
             <div class="detail-info__meta">
-              <CategoryBadge :category="ringtone.category" :label="ringtone.categoryLabel" />
+              <CategoryBadge 
+                :category="ringtone.category_slug" 
+                :label="ringtone.category_label" 
+                :icon="ringtone.category_icon"
+                :color="ringtone.category_color"
+              />
               <span><Icon icon="mdi:timer-outline" class="dmeta-icon" /> {{ ringtone.duration }}</span>
               <span><Icon icon="mdi:download" class="dmeta-icon" /> {{ formatDownloads(ringtone.downloads) }} download</span>
               <span><Icon icon="mdi:star" class="dmeta-icon dmeta-icon--star" /> {{ ringtone.rating }}</span>
-              <span><Icon icon="mdi:calendar-outline" class="dmeta-icon" /> {{ formatDate(ringtone.dateAdded) }}</span>
+              <span><Icon icon="mdi:calendar-outline" class="dmeta-icon" /> {{ formatDate(ringtone.created_at) }}</span>
             </div>
 
             <!-- Download buttons -->
             <div class="detail-info__downloads">
-              <router-link :to="`/download/${ringtone.id}`" class="btn btn-download" id="download-mp3-btn">
+              <router-link :to="`/download/${ringtone.slug}`" class="btn btn-download" id="download-mp3-btn">
                 <Icon icon="mdi:download" /> Download MP3
               </router-link>
-              <router-link :to="`/download/${ringtone.id}?format=m4r`" class="btn btn-download btn-download--m4r" id="download-m4r-btn">
+              <router-link :to="`/download/${ringtone.slug}?format=m4r`" class="btn btn-download btn-download--m4r" id="download-m4r-btn">
                 <Icon icon="mdi:apple" /> Download M4R (iPhone)
               </router-link>
             </div>
@@ -61,10 +66,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { Icon } from '@iconify/vue'
-import { getRingtoneById, getRingtonesByCategory, formatDownloads } from '../data/ringtones'
+import { api } from '../services/api'
 import BreadcrumbNav from '../components/shared/BreadcrumbNav.vue'
 import RingtonePlayer from '../components/ringtone/RingtonePlayer.vue'
 import RingtoneGrid from '../components/ringtone/RingtoneGrid.vue'
@@ -75,33 +80,64 @@ import AppFooter from '../components/layout/AppFooter.vue'
 
 const route = useRoute()
 
-const ringtone = computed(() => getRingtoneById(route.params.id as string))
+const ringtone = ref<any>(null)
+const similarRingtones = ref<any[]>([])
 
-const similarRingtones = computed(() => {
-  if (!ringtone.value) return []
-  return getRingtonesByCategory(ringtone.value.category)
-    .filter(r => r.id !== ringtone.value!.id)
-    .slice(0, 6)
-})
+const fetchRingtoneData = async () => {
+  const slug = route.params.id as string
+  if (!slug) return
+
+  const res = await api.getRingtone(slug)
+  if (res.success) {
+    ringtone.value = res.data
+
+    // Fetch similar ringtones
+    const similarRes = await api.getRingtones({
+      category: ringtone.value.category_slug,
+      limit: 7
+    })
+    
+    if (similarRes.success) {
+      similarRingtones.value = similarRes.data
+        .filter((r: any) => r.slug !== slug)
+        .slice(0, 6)
+    }
+  } else {
+    ringtone.value = null
+  }
+}
+
+watch(() => route.params.id, () => {
+  fetchRingtoneData()
+}, { immediate: true })
 
 const breadcrumbs = computed(() => [
-  { label: ringtone.value?.categoryLabel || 'Kategori', to: `/kategori/${ringtone.value?.category}` },
+  { label: ringtone.value?.category_label || 'Kategori', to: `/kategori/${ringtone.value?.category_slug}` },
   { label: ringtone.value?.title || 'Ringtone' }
 ])
 
 function formatDate(dateStr: string): string {
+  if (!dateStr) return ''
   return new Date(dateStr).toLocaleDateString('id-ID', {
     day: 'numeric', month: 'long', year: 'numeric'
   })
 }
 
-watch(() => route.params.id, () => {
-  if (ringtone.value) {
-    document.title = `${ringtone.value.title} — BunYing`
-    const meta = document.querySelector('meta[name="description"]')
-    if (meta) meta.setAttribute('content', ringtone.value.description)
+function formatDownloads(count: number): string {
+  if (!count) return '0'
+  if (count >= 1000) {
+    return (count / 1000).toFixed(1).replace(/\.0$/, '') + 'K'
   }
-}, { immediate: true })
+  return count.toString()
+}
+
+watch(ringtone, (newVal) => {
+  if (newVal) {
+    document.title = `${newVal.title} — BunYing`
+    const meta = document.querySelector('meta[name="description"]')
+    if (meta) meta.setAttribute('content', newVal.description)
+  }
+})
 </script>
 
 <style scoped>

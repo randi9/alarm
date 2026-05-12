@@ -33,11 +33,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { Icon } from '@iconify/vue'
 import { useRoute } from 'vue-router'
-import { getCategoryBySlug } from '../data/categories'
-import { getRingtonesByCategory } from '../data/ringtones'
+import { api } from '../services/api'
 import BreadcrumbNav from '../components/shared/BreadcrumbNav.vue'
 import RingtoneGrid from '../components/ringtone/RingtoneGrid.vue'
 import AdPlaceholder from '../components/shared/AdPlaceholder.vue'
@@ -45,11 +44,25 @@ import AppFooter from '../components/layout/AppFooter.vue'
 
 const route = useRoute()
 
-const category = computed(() => getCategoryBySlug(route.params.slug as string))
+const category = ref<any>(null)
+const categoryRingtones = ref<any[]>([])
 
-const categoryRingtones = computed(() =>
-  getRingtonesByCategory(route.params.slug as string)
-)
+const fetchCategoryData = async () => {
+  const slug = route.params.slug as string
+  if (!slug) return
+
+  const res = await api.getCategory(slug)
+  if (res.success) {
+    category.value = res.data
+
+    const ringtonesRes = await api.getRingtones({ category: slug, limit: 50 })
+    if (ringtonesRes.success) {
+      categoryRingtones.value = ringtonesRes.data
+    }
+  } else {
+    category.value = null
+  }
+}
 
 const breadcrumbs = computed(() => [
   { label: 'Kategori', to: '/' },
@@ -57,10 +70,14 @@ const breadcrumbs = computed(() => [
 ])
 
 watch(() => route.params.slug, () => {
-  if (category.value) {
-    document.title = `${category.value.label} — BunYing`
-  }
+  fetchCategoryData()
 }, { immediate: true })
+
+watch(category, (newVal) => {
+  if (newVal) {
+    document.title = `${newVal.label} — BunYing`
+  }
+})
 </script>
 
 <style scoped>

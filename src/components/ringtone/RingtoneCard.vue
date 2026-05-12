@@ -1,6 +1,6 @@
 <template>
-  <article class="ringtone-card" :id="`ringtone-card-${ringtone.id}`">
-    <router-link :to="`/ringtone/${ringtone.id}`" class="ringtone-card__link">
+  <article class="ringtone-card" :id="`ringtone-card-${ringtone.slug}`">
+    <router-link :to="`/ringtone/${ringtone.slug}`" class="ringtone-card__link">
       <!-- Icon -->
       <div class="ringtone-card__icon" :style="{ background: iconBg }">
         <Icon :icon="catIcon" class="ringtone-card__cat-icon" :style="{ color: catColor }" />
@@ -10,7 +10,12 @@
       <div class="ringtone-card__content">
         <h3 class="ringtone-card__title">{{ ringtone.title }}</h3>
         <div class="ringtone-card__meta">
-          <CategoryBadge :category="ringtone.category" :label="ringtone.categoryLabel" />
+          <CategoryBadge 
+            :category="ringtone.category_slug" 
+            :label="ringtone.category_label" 
+            :icon="ringtone.category_icon"
+            :color="ringtone.category_color"
+          />
           <span class="ringtone-card__duration"><Icon icon="mdi:timer-outline" class="meta-icon" /> {{ ringtone.duration }}</span>
         </div>
         <div class="ringtone-card__stats">
@@ -26,7 +31,7 @@
         class="ringtone-card__play"
         :class="{ 'ringtone-card__play--active': isCurrentPlaying }"
         @click.prevent="handlePlay"
-        :id="`play-${ringtone.id}`"
+        :id="`play-${ringtone.slug}`"
         :aria-label="isCurrentPlaying ? 'Pause' : 'Play'"
       >
         <div class="ringtone-card__play-ring" v-if="isCurrentPlaying"></div>
@@ -40,9 +45,9 @@
       </button>
 
       <router-link
-        :to="`/download/${ringtone.id}`"
+        :to="`/download/${ringtone.slug}`"
         class="ringtone-card__download-btn"
-        :id="`download-${ringtone.id}`"
+        :id="`download-${ringtone.slug}`"
         @click.stop
       >
         <Icon icon="mdi:download" width="16" />
@@ -54,32 +59,36 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Icon } from '@iconify/vue'
-import type { Ringtone } from '../../data/ringtones'
-import { formatDownloads } from '../../data/ringtones'
-import { getCategoryBySlug } from '../../data/categories'
 import { useAudioPlayer } from '../../composables/useAudioPlayer'
 import CategoryBadge from './CategoryBadge.vue'
 
 const props = defineProps<{
-  ringtone: Ringtone
+  ringtone: any
 }>()
 
 const { currentRingtone, isPlaying, play } = useAudioPlayer()
 
 const isCurrentPlaying = computed(() =>
-  currentRingtone.value?.id === props.ringtone.id && isPlaying.value
+  currentRingtone.value?.slug === props.ringtone.slug && isPlaying.value
 )
 
-const categoryData = computed(() => getCategoryBySlug(props.ringtone.category))
-const catIcon = computed(() => categoryData.value?.icon || 'mdi:volume-high')
-const catColor = computed(() => categoryData.value?.color || '#6D28D9')
+const catIcon = computed(() => props.ringtone.category_icon || 'mdi:volume-high')
+const catColor = computed(() => props.ringtone.category_color || '#6D28D9')
 
 const iconBg = computed(() => {
-  const color = categoryData.value?.color || '#6D28D9'
+  const color = props.ringtone.category_color || '#6D28D9'
   return `linear-gradient(135deg, ${color}30, ${color}10)`
 })
 
-const formattedDownloads = computed(() => formatDownloads(props.ringtone.downloads))
+function formatDownloadsLocal(count: number): string {
+  if (!count) return '0'
+  if (count >= 1000) {
+    return (count / 1000).toFixed(1).replace(/\.0$/, '') + 'K'
+  }
+  return count.toString()
+}
+
+const formattedDownloads = computed(() => formatDownloadsLocal(props.ringtone.downloads))
 
 function handlePlay() {
   play(props.ringtone)

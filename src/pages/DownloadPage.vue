@@ -57,10 +57,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { Icon } from '@iconify/vue'
-import { getRingtoneById } from '../data/ringtones'
+import { api } from '../services/api'
 import { useDownload } from '../composables/useDownload'
 import CountdownTimer from '../components/download/CountdownTimer.vue'
 import AffiliateSection from '../components/download/AffiliateSection.vue'
@@ -69,9 +69,21 @@ import AdPlaceholder from '../components/shared/AdPlaceholder.vue'
 import AppFooter from '../components/layout/AppFooter.vue'
 
 const route = useRoute()
-const ringtone = computed(() => getRingtoneById(route.params.id as string))
 const format = computed(() => (route.query.format as string) || 'mp3')
 const isComplete = ref(false)
+const ringtone = ref<any>(null)
+
+watch(() => route.params.id, async () => {
+  const slug = route.params.id as string
+  if (slug) {
+    const res = await api.getRingtone(slug)
+    if (res.success) {
+      ringtone.value = res.data
+    } else {
+      ringtone.value = null
+    }
+  }
+}, { immediate: true })
 const { triggerDownload } = useDownload()
 
 function onCountdownComplete() {
@@ -81,6 +93,8 @@ function onCountdownComplete() {
 function handleDownload(fmt: 'mp3' | 'm4r') {
   if (ringtone.value) {
     triggerDownload(ringtone.value, fmt)
+    // Optionally increment download count via API
+    api.incrementDownload(ringtone.value.slug).catch(console.error)
   }
 }
 

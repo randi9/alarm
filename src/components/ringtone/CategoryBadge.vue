@@ -8,23 +8,22 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Icon } from '@iconify/vue'
-import { getCategoryBySlug } from '../../data/categories'
 
 const props = defineProps<{
   category: string
   label: string
+  icon?: string
+  color?: string
 }>()
 
-const categoryData = computed(() => getCategoryBySlug(props.category))
-
-const iconName = computed(() => categoryData.value?.icon || 'mdi:music-note')
+const iconName = computed(() => props.icon || 'mdi:music-note')
 
 const bgColor = computed(() => {
-  const color = categoryData.value?.color || '#6D28D9'
-  return color + '20'
+  const c = props.color || '#6D28D9'
+  return c + '20'
 })
 
-const textColor = computed(() => categoryData.value?.color || '#6D28D9')
+const textColor = computed(() => props.color || '#6D28D9')
 </script>
 
 <style scoped>

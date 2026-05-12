@@ -2,7 +2,7 @@
   <div class="ringtone-grid" id="ringtone-grid">
     <RingtoneCard
       v-for="ringtone in ringtones"
-      :key="ringtone.id"
+      :key="ringtone.slug"
       :ringtone="ringtone"
     />
     <div v-if="ringtones.length === 0" class="ringtone-grid__empty">
@@ -15,11 +15,10 @@
 
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
-import type { Ringtone } from '../../data/ringtones'
 import RingtoneCard from './RingtoneCard.vue'
 
 defineProps<{
-  ringtones: Ringtone[]
+  ringtones: any[]
 }>()
 </script>
 

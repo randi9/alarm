@@ -26,10 +26,11 @@
         <div class="footer__section">
           <h4 class="footer__heading">Kategori Populer</h4>
           <ul class="footer__links">
-            <li><router-link to="/kategori/suara-emak"><Icon icon="mdi:account-voice" class="footer__cat-icon" /> Suara Emak</router-link></li>
-            <li><router-link to="/kategori/anime-wibu"><Icon icon="mdi:star-four-points" class="footer__cat-icon" /> Anime & Wibu</router-link></li>
-            <li><router-link to="/kategori/islami"><Icon icon="mdi:mosque" class="footer__cat-icon" /> Islami</router-link></li>
-            <li><router-link to="/kategori/lucu-receh"><Icon icon="mdi:emoticon-lol-outline" class="footer__cat-icon" /> Lucu & Receh</router-link></li>
+            <li v-for="cat in categories.slice(0, 4)" :key="cat.slug">
+              <router-link :to="`/kategori/${cat.slug}`">
+                <Icon :icon="cat.icon" class="footer__cat-icon" /> {{ cat.label }}
+              </router-link>
+            </li>
           </ul>
         </div>
 
@@ -65,9 +66,19 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import { Icon } from '@iconify/vue'
+import { api } from '../../services/api'
 
 const currentYear = new Date().getFullYear()
+const categories = ref<any[]>([])
+
+onMounted(async () => {
+  const res = await api.getCategories()
+  if (res.success) {
+    categories.value = res.data
+  }
+})
 </script>
 
 <style scoped>

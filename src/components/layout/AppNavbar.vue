@@ -57,13 +57,14 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { Icon } from '@iconify/vue'
-import { categories } from '../../data/categories'
+import { api } from '../../services/api'
 
 defineEmits(['toggleSearch'])
 
 const isScrolled = ref(false)
 const isMobileOpen = ref(false)
 const showDropdown = ref(false)
+const categories = ref<any[]>([])
 
 function handleScroll() {
   isScrolled.value = window.scrollY > 20
@@ -78,8 +79,12 @@ function closeMobileAndDropdown() {
   showDropdown.value = false
 }
 
-onMounted(() => {
+onMounted(async () => {
   window.addEventListener('scroll', handleScroll, { passive: true })
+  const res = await api.getCategories()
+  if (res.success) {
+    categories.value = res.data
+  }
 })
 
 onUnmounted(() => {

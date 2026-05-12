@@ -1,8 +1,8 @@
 import { ref, computed } from 'vue'
-import type { Ringtone } from '../data/ringtones'
+// No static import needed
 
 const audio = new Audio()
-const currentRingtone = ref<Ringtone | null>(null)
+const currentRingtone = ref<any | null>(null)
 const isPlaying = ref(false)
 const currentTime = ref(0)
 const duration = ref(0)
@@ -37,14 +37,14 @@ export function useAudioPlayer() {
     return (currentTime.value / duration.value) * 100
   })
 
-  function play(ringtone: Ringtone) {
-    if (currentRingtone.value?.id === ringtone.id && !audio.paused) {
+  function play(ringtone: any) {
+    if (currentRingtone.value?.slug === ringtone.slug && !audio.paused) {
       pause()
       return
     }
 
-    if (currentRingtone.value?.id !== ringtone.id) {
-      audio.src = ringtone.audioFile
+    if (currentRingtone.value?.slug !== ringtone.slug) {
+      audio.src = ringtone.audio_url || `/audio/${ringtone.audio_filename}`
       currentRingtone.value = ringtone
       duration.value = 0
       currentTime.value = 0

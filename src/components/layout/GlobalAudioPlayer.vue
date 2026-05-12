@@ -17,12 +17,12 @@
         <!-- Info -->
         <div class="global-player__info">
           <router-link
-            :to="`/ringtone/${currentRingtone.id}`"
+            :to="`/ringtone/${currentRingtone.slug}`"
             class="global-player__title"
           >
             {{ currentRingtone.title }}
           </router-link>
-          <span class="global-player__category">{{ currentRingtone.categoryLabel }}</span>
+          <span class="global-player__category">{{ currentRingtone.category_label }}</span>
         </div>
 
         <!-- Progress -->
@@ -40,7 +40,7 @@
 
         <!-- Download -->
         <router-link
-          :to="`/download/${currentRingtone.id}`"
+          :to="`/download/${currentRingtone.slug}`"
           class="global-player__download"
           id="global-player-download"
         >

@@ -57,12 +57,11 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { Ringtone } from '../../data/ringtones'
 import { useAudioPlayer } from '../../composables/useAudioPlayer'
 import WaveformVisualizer from './WaveformVisualizer.vue'
 
 const props = defineProps<{
-  ringtone: Ringtone
+  ringtone: any
 }>()
 
 const {
@@ -79,19 +78,22 @@ const {
 } = useAudioPlayer()
 
 const isCurrentPlaying = computed(() =>
-  currentRingtone.value?.id === props.ringtone.id && isPlaying.value
+  currentRingtone.value?.slug === props.ringtone.slug && isPlaying.value
 )
 
 const isCurrentRingtone = computed(() =>
-  currentRingtone.value?.id === props.ringtone.id
+  currentRingtone.value?.slug === props.ringtone.slug
 )
 
 const displayProgress = computed(() => isCurrentRingtone.value ? progress.value : 0)
 const displayCurrentTime = computed(() => isCurrentRingtone.value ? currentTime.value : 0)
 const displayDuration = computed(() => {
   if (isCurrentRingtone.value && duration.value > 0) return duration.value
-  // Parse duration string
-  const parts = props.ringtone.duration.split(':')
+  // Parse duration string or use duration_ms
+  if (props.ringtone.duration_ms) {
+    return props.ringtone.duration_ms / 1000
+  }
+  const parts = (props.ringtone.duration || '0:00').split(':')
   return parseInt(parts[0]) * 60 + parseInt(parts[1])
 })
 

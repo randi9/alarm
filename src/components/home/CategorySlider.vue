@@ -12,7 +12,6 @@
         >
           <Icon :icon="cat.icon" class="category-slider__icon" :style="{ color: cat.color }" />
           <span class="category-slider__label">{{ cat.label }}</span>
-          <span class="category-slider__count">{{ getCategoryCount(cat.slug) }} item</span>
         </router-link>
       </div>
     </div>
@@ -20,13 +19,18 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import { Icon } from '@iconify/vue'
-import { categories } from '../../data/categories'
-import { ringtones } from '../../data/ringtones'
+import { api } from '../../services/api'
 
-function getCategoryCount(slug: string): number {
-  return ringtones.filter(r => r.category === slug).length
-}
+const categories = ref<any[]>([])
+
+onMounted(async () => {
+  const res = await api.getCategories()
+  if (res.success) {
+    categories.value = res.data
+  }
+})
 </script>
 
 <style scoped>
