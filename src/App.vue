@@ -1,12 +1,20 @@
 <template>
-  <AppNavbar @toggleSearch="handleToggleSearch" />
+  <AppNavbar v-if="!isAdminRoute" @toggleSearch="handleToggleSearch" />
   <router-view />
-  <GlobalAudioPlayer />
+  <GlobalAudioPlayer v-if="!isAdminRoute" />
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import AppNavbar from './components/layout/AppNavbar.vue'
 import GlobalAudioPlayer from './components/layout/GlobalAudioPlayer.vue'
+
+const route = useRoute()
+
+const isAdminRoute = computed(() => {
+  return route.path.startsWith('/admin') || route.path === '/login'
+})
 
 function handleToggleSearch() {
   // Focus the search input on the page if it exists

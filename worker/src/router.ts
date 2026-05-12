@@ -74,6 +74,11 @@ export async function handleRequest(request: Request, env: Env): Promise<Respons
       const authResponse = basicAuth(request, env)
       if (authResponse) return withCors(authResponse)
 
+      // Admin Categories (GET for auth verification + listing)
+      if (method === 'GET' && pathname === '/api/admin/categories') {
+        return withCors(await listCategories(env))
+      }
+
       // Admin Ringtones
       if (method === 'POST' && pathname === '/api/admin/ringtones') {
         return withCors(await createRingtone(request, env))
