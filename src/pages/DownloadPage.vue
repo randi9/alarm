@@ -88,6 +88,8 @@ const { triggerDownload } = useDownload()
 
 function onCountdownComplete() {
   isComplete.value = true
+  // Auto trigger download for default format
+  handleDownload(format.value as 'mp3' | 'm4r')
 }
 
 function handleDownload(fmt: 'mp3' | 'm4r') {

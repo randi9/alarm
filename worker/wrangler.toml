@@ -16,7 +16,7 @@ bucket_name = "bunying-audio"
 # Environment variables
 [vars]
 ADMIN_USERNAME = "admin"
-R2_PUBLIC_URL = "https://pub-placeholder.r2.dev"
+R2_PUBLIC_URL = "https://audio.alarmu.site"
 
 # CORS for local dev
 # [dev]
