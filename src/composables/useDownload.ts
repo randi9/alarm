@@ -1,26 +1,45 @@
 import { ref } from 'vue'
-// No need for static Ringtone type anymore
+
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8787'
 
 export function useDownload() {
   const isDownloading = ref(false)
 
-  function triggerDownload(ringtone: any, format: 'mp3' | 'm4r' = 'mp3') {
+  async function triggerDownload(ringtone: any, format: 'mp3' | 'm4r' = 'mp3') {
+    if (isDownloading.value) return
     isDownloading.value = true
 
-    const link = document.createElement('a')
-    // Fallback to audio_filename if audio_url is empty (like in seed data without real URL)
-    link.href = ringtone.audio_url || `/audio/${ringtone.audio_filename}`
-    link.download = `${ringtone.slug}.${format}`
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
+    try {
+      // Use the worker proxy to download (avoids cross-origin issues)
+      const proxyUrl = `${API_BASE}/api/download/${ringtone.slug}`
+      
+      const response = await fetch(proxyUrl)
+      if (!response.ok) throw new Error('Download failed')
+      
+      const blob = await response.blob()
+      const blobUrl = URL.createObjectURL(blob)
 
-    // Increment download count client-side (optimistic update)
-    ringtone.downloads += 1
+      const link = document.createElement('a')
+      link.href = blobUrl
+      link.download = `${ringtone.slug}.${format}`
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
 
-    setTimeout(() => {
+      // Clean up blob URL
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 1000)
+
+      // Increment download count (optimistic)
+      if (ringtone.downloads !== undefined) {
+        ringtone.downloads += 1
+      }
+    } catch (err) {
+      console.error('Download error:', err)
+      // Fallback: open audio URL directly
+      window.open(ringtone.audio_url, '_blank')
+    } finally {
       isDownloading.value = false
-    }, 1000)
+    }
   }
 
   return {
