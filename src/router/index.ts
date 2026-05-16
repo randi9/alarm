@@ -32,12 +32,6 @@ const router = createRouter({
       meta: { title: 'Download — BunYing' }
     },
     {
-      path: '/premium',
-      name: 'premium',
-      component: () => import('../pages/PremiumPage.vue'),
-      meta: { title: 'Paket Premium — BunYing' }
-    },
-    {
       path: '/tentang',
       name: 'about',
       component: () => import('../pages/AboutPage.vue'),

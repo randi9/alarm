@@ -1,7 +1,10 @@
 <template>
   <section class="category-slider section" id="category-section">
     <div class="container">
-      <h2 class="section-title"><Icon icon="mdi:folder-open-outline" class="section-icon" /> Jelajahi Kategori</h2>
+      <div class="category-slider__header">
+        <h2 class="section-title"><Icon icon="mdi:folder-open-outline" class="section-icon" /> Jelajahi Kategori</h2>
+        <p class="section-subtitle">Temukan ringtone berdasarkan kategori favoritmu</p>
+      </div>
       <div class="category-slider__track">
         <router-link
           v-for="cat in categories"
@@ -10,7 +13,9 @@
           class="category-slider__card"
           :style="{ '--cat-color': cat.color }"
         >
-          <Icon :icon="cat.icon" class="category-slider__icon" :style="{ color: cat.color }" />
+          <div class="category-slider__icon-wrap" :style="{ background: `linear-gradient(135deg, ${cat.color}20, ${cat.color}08)` }">
+            <Icon :icon="cat.icon" class="category-slider__icon" :style="{ color: cat.color }" />
+          </div>
           <span class="category-slider__label">{{ cat.label }}</span>
         </router-link>
       </div>
@@ -40,6 +45,16 @@ onMounted(async () => {
   color: var(--primary-start);
 }
 
+.category-slider__header {
+  margin-bottom: var(--space-lg);
+}
+
+.section-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
 .category-slider__track {
   display: flex;
   gap: var(--space-md);
@@ -59,8 +74,8 @@ onMounted(async () => {
   width: 140px;
   padding: var(--space-lg) var(--space-md);
   border-radius: var(--radius-lg);
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,29 +84,39 @@ onMounted(async () => {
   transition: all var(--transition-base);
   text-align: center;
   cursor: pointer;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
 }
 
 .category-slider__card:hover {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--cat-color) 15%, transparent), color-mix(in srgb, var(--cat-color) 5%, transparent));
-  border-color: color-mix(in srgb, var(--cat-color) 40%, transparent);
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px color-mix(in srgb, var(--cat-color) 20%, transparent);
-  animation: float 3s ease infinite;
+  background: rgba(255, 255, 255, 0.9);
+  border-color: color-mix(in srgb, var(--cat-color) 30%, transparent);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--cat-color) 15%, transparent);
+}
+
+.category-slider__icon-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-base);
+}
+
+.category-slider__card:hover .category-slider__icon-wrap {
+  transform: scale(1.1);
 }
 
 .category-slider__icon {
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 .category-slider__label {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-primary);
-}
-
-.category-slider__count {
-  font-size: 0.7rem;
-  color: var(--text-muted);
 }
 
 @media (min-width: 768px) {

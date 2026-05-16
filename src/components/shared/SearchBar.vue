@@ -50,20 +50,21 @@ defineExpose({ focus: () => inputRef.value?.focus() })
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  background: var(--glass-bg);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: var(--radius-xl);
-  padding: var(--space-sm) var(--space-lg);
+  padding: 0.6rem var(--space-lg);
   transition: all var(--transition-base);
   max-width: 500px;
   width: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
 }
 
 .search-bar--focused {
   border-color: var(--primary-start);
-  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
-  background: var(--glass-bg-strong);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1), 0 4px 16px rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .search-bar__icon {
@@ -98,7 +99,7 @@ defineExpose({ focus: () => inputRef.value?.focus() })
 }
 
 .search-bar__clear:hover {
-  background: var(--glass-bg-strong);
+  background: rgba(0, 0, 0, 0.05);
   color: var(--text-primary);
 }
 </style>

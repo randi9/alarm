@@ -1,7 +1,10 @@
 <template>
   <section class="featured section" id="featured-section">
     <div class="container">
-      <h2 class="section-title"><Icon icon="mdi:star-shooting" class="section-icon" /> Ringtone Minggu Ini</h2>
+      <div class="featured__header">
+        <h2 class="section-title"><Icon icon="mdi:star-shooting" class="section-icon" /> Ringtone Minggu Ini</h2>
+        <p class="section-subtitle">Pilihan terpopuler yang lagi viral</p>
+      </div>
       <div class="featured__grid">
         <router-link
           v-for="ringtone in featuredRingtones"
@@ -11,7 +14,9 @@
         >
           <div class="featured__card-bg" :style="{ '--cat-color': ringtone.category_color || '#6D28D9' }"></div>
           <div class="featured__card-content">
-            <Icon :icon="ringtone.category_icon || 'mdi:music-note'" class="featured__cat-icon" :style="{ color: ringtone.category_color || '#6D28D9' }" />
+            <div class="featured__icon-wrap" :style="{ background: `linear-gradient(135deg, ${ringtone.category_color || '#6D28D9'}25, ${ringtone.category_color || '#6D28D9'}08)` }">
+              <Icon :icon="ringtone.category_icon || 'mdi:music-note'" class="featured__cat-icon" :style="{ color: ringtone.category_color || '#6D28D9' }" />
+            </div>
             <h3 class="featured__title">{{ ringtone.title }}</h3>
             <p class="featured__desc">{{ ringtone.description }}</p>
             <div class="featured__meta">
@@ -65,6 +70,16 @@ function handlePlay(ringtone: any) {
   color: var(--accent-orange);
 }
 
+.featured__header {
+  margin-bottom: var(--space-lg);
+}
+
+.section-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
 .featured__grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -81,17 +96,20 @@ function handlePlay(ringtone: any) {
   position: relative;
   border-radius: var(--radius-xl);
   overflow: hidden;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.04);
   transition: all var(--transition-base);
   min-height: 260px;
   display: flex;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
 .featured__card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-  border-color: rgba(124, 58, 237, 0.3);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  border-color: rgba(124, 58, 237, 0.15);
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .featured__card-bg {
@@ -102,13 +120,13 @@ function handlePlay(ringtone: any) {
   height: 200px;
   border-radius: 50%;
   background: var(--cat-color);
-  opacity: 0.08;
+  opacity: 0.06;
   filter: blur(40px);
   transition: all var(--transition-base);
 }
 
 .featured__card:hover .featured__card-bg {
-  opacity: 0.15;
+  opacity: 0.12;
   transform: scale(1.3);
 }
 
@@ -122,19 +140,29 @@ function handlePlay(ringtone: any) {
   flex: 1;
 }
 
+.featured__icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .featured__cat-icon {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
 }
 
 .featured__title {
   font-size: 1.1rem;
   font-weight: 700;
   line-height: 1.3;
+  color: var(--text-primary);
 }
 
 .featured__desc {
   font-size: 0.8rem;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -158,7 +186,7 @@ function handlePlay(ringtone: any) {
 
 .fmeta-icon {
   font-size: 0.85rem;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .fmeta-icon--star {

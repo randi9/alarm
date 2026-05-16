@@ -30,10 +30,6 @@
           </div>
         </div>
 
-        <router-link to="/premium" class="navbar__link" id="nav-premium" @click="closeMobile">
-          <Icon icon="mdi:gift-outline" class="navbar__premium-badge" />
-          Premium
-        </router-link>
         <router-link to="/tentang" class="navbar__link" id="nav-tentang" @click="closeMobile">Tentang</router-link>
       </div>
 
@@ -101,16 +97,16 @@ onUnmounted(() => {
   height: var(--navbar-height);
   z-index: var(--z-navbar);
   transition: all var(--transition-base);
-  background: rgba(15, 15, 26, 0.6);
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid transparent;
 }
 
 .navbar--scrolled {
-  background: rgba(15, 15, 26, 0.9);
+  background: rgba(255, 255, 255, 0.9);
   border-bottom-color: var(--glass-border);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .navbar__inner {
@@ -176,12 +172,6 @@ onUnmounted(() => {
 .navbar__link--dropdown {
   cursor: pointer;
 }
-
-.navbar__premium-badge {
-  font-size: 1rem;
-  color: var(--accent-orange);
-}
-
 /* Dropdown */
 .navbar__dropdown {
   position: relative;

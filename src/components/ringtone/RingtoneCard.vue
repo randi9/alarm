@@ -99,19 +99,21 @@ function handlePlay() {
 .ringtone-card {
   display: flex;
   align-items: center;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.04);
   border-radius: var(--radius-lg);
   padding: var(--space-md);
   transition: all var(--transition-base);
   gap: var(--space-sm);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
 }
 
 .ringtone-card:hover {
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.15);
-  border-color: rgba(124, 58, 237, 0.3);
-  background: var(--glass-bg-strong);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.1);
+  border-color: rgba(124, 58, 237, 0.15);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .ringtone-card__link {
@@ -150,6 +152,7 @@ function handlePlay() {
   font-size: 0.9rem;
   font-weight: 600;
   line-height: 1.3;
+  color: var(--text-primary);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -189,7 +192,7 @@ function handlePlay() {
 
 .meta-icon {
   font-size: 0.75rem;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .meta-icon--star {
@@ -208,8 +211,8 @@ function handlePlay() {
 
 .ringtone-card__play {
   position: relative;
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--primary-start), var(--primary-end));
   color: white;
@@ -217,11 +220,12 @@ function handlePlay() {
   align-items: center;
   justify-content: center;
   transition: all var(--transition-fast);
+  box-shadow: 0 3px 10px rgba(124, 58, 237, 0.2);
 }
 
 .ringtone-card__play:hover {
-  transform: scale(1.1);
-  box-shadow: var(--shadow-glow);
+  transform: scale(1.12);
+  box-shadow: 0 5px 18px rgba(124, 58, 237, 0.3);
 }
 
 .ringtone-card__play--active {
@@ -248,7 +252,7 @@ function handlePlay() {
 }
 
 .ringtone-card__download-btn:hover {
-  background: rgba(16, 185, 129, 0.15);
+  background: rgba(16, 185, 129, 0.1);
 }
 
 /* Mobile */

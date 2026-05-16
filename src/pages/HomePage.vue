@@ -75,22 +75,24 @@ const secondBatch = computed(() => filteredRingtones.value.slice(6))
 }
 
 .home__sort-select {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: var(--radius-md);
   padding: var(--space-sm) var(--space-md);
   color: var(--text-primary);
   font-size: 0.85rem;
   cursor: pointer;
   outline: none;
-  transition: border-color var(--transition-fast);
+  transition: all var(--transition-fast);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .home__sort-select:focus {
   border-color: var(--primary-start);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
 }
 
 .home__sort-select option {
-  background: var(--bg-secondary);
+  background: white;
 }
 </style>

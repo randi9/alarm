@@ -17,7 +17,6 @@
           <h4 class="footer__heading">Menu</h4>
           <ul class="footer__links">
             <li><router-link to="/">Home</router-link></li>
-            <li><router-link to="/premium">Premium</router-link></li>
             <li><router-link to="/tentang">Tentang</router-link></li>
           </ul>
         </div>
@@ -83,8 +82,8 @@ onMounted(async () => {
 
 <style scoped>
 .footer {
-  background: var(--bg-secondary);
-  border-top: 1px solid var(--glass-border);
+  background: #F1F5F9;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
   padding: var(--space-3xl) 0 var(--space-xl);
   margin-top: var(--space-3xl);
 }
@@ -172,7 +171,7 @@ onMounted(async () => {
 .footer__bottom {
   margin-top: var(--space-2xl);
   padding-top: var(--space-xl);
-  border-top: 1px solid var(--glass-border);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
   display: flex;
   align-items: center;
   justify-content: space-between;
