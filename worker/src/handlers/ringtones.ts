@@ -163,9 +163,17 @@ export async function createRingtone(req: Request, env: Env): Promise<Response> 
 
   // Upload to R2
   const audioBuffer = await audioFile.arrayBuffer()
-  await env.AUDIO_BUCKET.put(`ringtones/${filename}`, audioBuffer, {
-    httpMetadata: { contentType: audioFile.type }
-  })
+  try {
+    await env.AUDIO_BUCKET.put(`ringtones/${filename}`, audioBuffer, {
+      httpMetadata: { contentType: audioFile.type }
+    })
+  } catch (r2Error: any) {
+    console.error('R2 upload failed:', r2Error)
+    return Response.json({
+      success: false,
+      error: `R2 upload failed: ${r2Error.message || 'Unknown error'}`,
+    }, { status: 500 })
+  }
 
   // Insert to D1
   const audioUrl = `${env.R2_PUBLIC_URL}/ringtones/${filename}`

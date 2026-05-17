@@ -11,7 +11,7 @@ database_id = "aa687aed-6b21-4d3c-a29c-f4f4d09e92f4"
 # R2 Bucket binding
 [[r2_buckets]]
 binding = "AUDIO_BUCKET"
-bucket_name = "alarmu-audio"
+bucket_name = "bunying-audio"
 
 # Environment variables
 [vars]
