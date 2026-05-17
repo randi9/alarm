@@ -70,15 +70,6 @@ function formatDownloads(count: number): string {
 function handlePlay(ringtone: any) {
   play(ringtone)
 }
-
-function handleDownloadClick(ringtone: any) {
-  if (ringtone.affiliate_url) {
-    window.open(ringtone.affiliate_url, '_blank', 'noopener,noreferrer')
-  } else {
-    // Optionally open a default fallback link
-    window.open('https://shope.ee/placeholder-affiliate', '_blank', 'noopener,noreferrer')
-  }
-}
 </script>
 
 <style scoped>

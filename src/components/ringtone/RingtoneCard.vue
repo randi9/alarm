@@ -93,15 +93,6 @@ const formattedDownloads = computed(() => formatDownloadsLocal(props.ringtone.do
 function handlePlay() {
   play(props.ringtone)
 }
-
-function handleDownloadClick() {
-  if (props.ringtone.affiliate_url) {
-    window.open(props.ringtone.affiliate_url, '_blank', 'noopener,noreferrer')
-  } else {
-    // Optionally open a default fallback link
-    window.open('https://shope.ee/placeholder-affiliate', '_blank', 'noopener,noreferrer')
-  }
-}
 </script>
 
 <style scoped>
