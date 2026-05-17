@@ -109,21 +109,13 @@ function handleDownloadClick() {
 .ringtone-card {
   display: flex;
   align-items: center;
-  background: var(--card-bg);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-lg);
   padding: var(--space-md) !important;
   transition: all var(--transition-base);
   gap: var(--space-sm);
-  box-shadow: 0 1px 4px var(--card-shadow);
 }
 
 .ringtone-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px var(--card-shadow-hover);
-  border-color: rgba(198, 253, 1, 0.15);
-  background: var(--card-bg-hover);
 }
 
 .ringtone-card__link {
