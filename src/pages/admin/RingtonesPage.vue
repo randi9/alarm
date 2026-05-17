@@ -135,6 +135,11 @@
             <input type="text" v-model="formData.tagsInput" class="form-input" placeholder="lucu, emak, alarm" />
           </div>
 
+          <div class="form-group">
+            <label>Shopee Affiliate URL</label>
+            <input type="url" v-model="formData.affiliate_url" class="form-input" placeholder="https://shope.ee/..." />
+          </div>
+
           <div class="form-row">
             <label class="form-checkbox">
               <input type="checkbox" v-model="formData.is_featured" /> Featured
@@ -203,6 +208,7 @@ const defaultForm = {
   is_featured: false,
   is_trending: false,
   is_premium: false,
+  affiliate_url: '',
   status: 'published'
 }
 
@@ -269,6 +275,7 @@ async function openModal(ringtone?: any) {
       is_featured: !!ringtone.is_featured,
       is_trending: !!ringtone.is_trending,
       is_premium: !!ringtone.is_premium,
+      affiliate_url: ringtone.affiliate_url || '',
       tagsInput: ringtone.tags?.join(', ') || ''
     }
   } else {
@@ -300,6 +307,7 @@ async function saveRingtone() {
         is_featured: formData.value.is_featured,
         is_trending: formData.value.is_trending,
         is_premium: formData.value.is_premium,
+        affiliate_url: formData.value.affiliate_url,
         status: formData.value.status
       }
       const res = await adminApi.updateRingtone(formData.value.slug, payload)
@@ -324,6 +332,7 @@ async function saveRingtone() {
         is_featured: formData.value.is_featured,
         is_trending: formData.value.is_trending,
         is_premium: formData.value.is_premium,
+        affiliate_url: formData.value.affiliate_url,
         status: formData.value.status
       }
 
