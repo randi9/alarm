@@ -76,9 +76,8 @@ export async function handleRequest(request: Request, env: Env): Promise<Respons
       if (!row) {
         return withCors(Response.json({ success: false, error: 'Not found' }, { status: 404 }))
       }
-      const urlObj = new URL(request.url)
-      const format = urlObj.searchParams.get('format') === 'm4r' ? 'm4r' : 'mp3'
-      const filename = `${slug}.${format}`
+
+      const filename = `${slug}.mp3`
 
       // Try R2 bucket first
       try {

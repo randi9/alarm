@@ -5,14 +5,14 @@ const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8787'
 export function useDownload() {
   const isDownloading = ref(false)
 
-  async function triggerDownload(ringtone: any, format: 'mp3' | 'm4r' = 'mp3') {
+  async function triggerDownload(ringtone: any, _format: 'mp3' | 'm4r' = 'mp3') {
     if (isDownloading.value) return
     isDownloading.value = true
 
     try {
       // Fetch through the worker proxy — it adds Content-Disposition: attachment
       // and proper CORS headers, ensuring cross-origin download works
-      const proxyUrl = `${API_BASE}/api/download/${ringtone.slug}?format=${format}`
+      const proxyUrl = `${API_BASE}/api/download/${ringtone.slug}`
       const response = await fetch(proxyUrl)
       if (!response.ok) throw new Error('Download failed')
 
@@ -22,7 +22,7 @@ export function useDownload() {
       // Blob URLs are same-origin, so <a download> always works
       const link = document.createElement('a')
       link.href = blobUrl
-      link.download = `${ringtone.slug}.${format}`
+      link.download = `${ringtone.slug}.mp3`
       link.style.display = 'none'
       document.body.appendChild(link)
       link.click()
