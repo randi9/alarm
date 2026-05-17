@@ -28,13 +28,12 @@
               <button class="featured__play" @click.prevent="handlePlay(ringtone)">
                 <Icon icon="mdi:play" /> Putar Sekarang
               </button>
-              <router-link
-                :to="`/download/${ringtone.slug}`"
+              <button
                 class="featured__download-btn"
-                @click.stop
+                @click.stop="handleDownloadClick(ringtone)"
               >
                 <Icon icon="mdi:download" />
-              </router-link>
+              </button>
             </div>
           </div>
         </router-link>
@@ -45,10 +44,12 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import { api } from '../../services/api'
 import { useAudioPlayer } from '../../composables/useAudioPlayer'
 
+const router = useRouter()
 const featuredRingtones = ref<any[]>([])
 const { play } = useAudioPlayer()
 
@@ -69,6 +70,15 @@ function formatDownloads(count: number): string {
 
 function handlePlay(ringtone: any) {
   play(ringtone)
+}
+
+function handleDownloadClick(ringtone: any) {
+  // Open affiliate link in new tab first
+  if (ringtone.affiliate_url) {
+    window.open(ringtone.affiliate_url, '_blank', 'noopener,noreferrer')
+  }
+  // Navigate to download page in current tab
+  router.push(`/download/${ringtone.slug}`)
 }
 </script>
 

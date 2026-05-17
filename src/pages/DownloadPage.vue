@@ -88,13 +88,7 @@ const { triggerDownload } = useDownload()
 
 function onCountdownComplete() {
   isComplete.value = true
-
-  // Open affiliate link in new tab
-  if (ringtone.value?.affiliate_url) {
-    window.open(ringtone.value.affiliate_url, '_blank', 'noopener,noreferrer')
-  }
-
-  // Auto trigger download for default format
+  // Auto trigger download
   handleDownload(format.value as 'mp3' | 'm4r')
 }
 

@@ -44,20 +44,20 @@
         </svg>
       </button>
 
-      <router-link
-        :to="`/download/${ringtone.slug}`"
+      <button
         class="ringtone-card__download-btn"
         :id="`download-${ringtone.slug}`"
-        @click.stop
+        @click.stop="handleDownloadClick"
       >
         <Icon icon="mdi:download" width="16" />
-      </router-link>
+      </button>
     </div>
   </article>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import { useAudioPlayer } from '../../composables/useAudioPlayer'
 import CategoryBadge from './CategoryBadge.vue'
@@ -66,6 +66,7 @@ const props = defineProps<{
   ringtone: any
 }>()
 
+const router = useRouter()
 const { currentRingtone, isPlaying, play } = useAudioPlayer()
 
 const isCurrentPlaying = computed(() =>
@@ -92,6 +93,15 @@ const formattedDownloads = computed(() => formatDownloadsLocal(props.ringtone.do
 
 function handlePlay() {
   play(props.ringtone)
+}
+
+function handleDownloadClick() {
+  // Open affiliate link in new tab first
+  if (props.ringtone.affiliate_url) {
+    window.open(props.ringtone.affiliate_url, '_blank', 'noopener,noreferrer')
+  }
+  // Navigate to download page in current tab
+  router.push(`/download/${props.ringtone.slug}`)
 }
 </script>
 
