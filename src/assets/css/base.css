@@ -190,28 +190,28 @@ ul, ol {
 
 .site-mesh__blob {
   position: absolute;
-  filter: blur(100px);
-  opacity: 0.12;
+  filter: blur(80px);
+  opacity: 0.5;
   border-radius: 50%;
   animation: float-blob 20s ease-in-out infinite alternate;
 }
 
 [data-theme="dark"] .site-mesh__blob {
-  opacity: 0.08;
+  opacity: 0.15;
 }
 
 .site-mesh__blob--1 {
-  top: 30%;
-  left: -15vw;
+  top: 20%;
+  left: -10vw;
   width: 40vw;
   height: 60vh;
-  background: var(--primary-start);
+  background: #b2e304;
   animation-delay: 0s;
 }
 
 .site-mesh__blob--2 {
-  top: 50%;
-  right: -15vw;
+  top: 60%;
+  right: -10vw;
   width: 40vw;
   height: 60vh;
   background: var(--accent-green);

@@ -1,4 +1,8 @@
 <template>
+  <div class="site-mesh" v-if="!isAdminRoute">
+    <div class="site-mesh__blob site-mesh__blob--1"></div>
+    <div class="site-mesh__blob site-mesh__blob--2"></div>
+  </div>
   <AppNavbar v-if="!isAdminRoute" @toggleSearch="handleToggleSearch" />
   <router-view />
   <GlobalAudioPlayer v-if="!isAdminRoute" />
