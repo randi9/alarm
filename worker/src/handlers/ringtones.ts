@@ -162,7 +162,8 @@ export async function createRingtone(req: Request, env: Env): Promise<Response> 
   const filename = `${slug}.${ext}`
 
   // Upload to R2
-  await env.AUDIO_BUCKET.put(`ringtones/${filename}`, audioFile.stream(), {
+  const audioBuffer = await audioFile.arrayBuffer()
+  await env.AUDIO_BUCKET.put(`ringtones/${filename}`, audioBuffer, {
     httpMetadata: { contentType: audioFile.type }
   })
 
