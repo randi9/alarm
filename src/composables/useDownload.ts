@@ -1,29 +1,51 @@
 import { ref } from 'vue'
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8787'
-
 export function useDownload() {
   const isDownloading = ref(false)
 
-  function triggerDownload(ringtone: any, _format: 'mp3' | 'm4r' = 'mp3') {
+  async function triggerDownload(ringtone: any, _format: 'mp3' | 'm4r' = 'mp3') {
     if (isDownloading.value) return
     isDownloading.value = true
 
-    // Direct navigation to the download proxy URL.
-    // The worker responds with Content-Disposition: attachment,
-    // so the browser downloads the file without leaving the page.
-    const proxyUrl = `${API_BASE}/api/download/${ringtone.slug}`
-    window.location.href = proxyUrl
+    try {
+      // Fetch audio file directly from the public R2 URL
+      const response = await fetch(ringtone.audio_url)
+      if (!response.ok) throw new Error('Download failed')
 
-    // Increment download count (optimistic)
-    if (ringtone.downloads !== undefined) {
-      ringtone.downloads += 1
-    }
+      const blob = await response.blob()
+      const blobUrl = URL.createObjectURL(blob)
 
-    // Reset flag after a short delay
-    setTimeout(() => {
+      // Create a hidden <a download> link and click it.
+      // Blob URLs are same-origin, so the download attribute works properly.
+      const link = document.createElement('a')
+      link.href = blobUrl
+      link.download = `${ringtone.slug}.mp3`
+      link.style.display = 'none'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+
+      // Clean up blob URL
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 3000)
+
+      // Increment download count (optimistic)
+      if (ringtone.downloads !== undefined) {
+        ringtone.downloads += 1
+      }
+    } catch (err) {
+      console.error('Download error:', err)
+      // Fallback: direct navigation to audio URL (will play/download depending on browser)
+      const link = document.createElement('a')
+      link.href = ringtone.audio_url
+      link.download = `${ringtone.slug}.mp3`
+      link.target = '_self'
+      link.style.display = 'none'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+    } finally {
       isDownloading.value = false
-    }, 3000)
+    }
   }
 
   return {
