@@ -5,7 +5,7 @@ const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8787'
 export function useDownload() {
   const isDownloading = ref(false)
 
-  function triggerDownload(ringtone: any, format: 'mp3' | 'm4r' = 'mp3') {
+  function triggerDownload(ringtone: any, _format: 'mp3' | 'm4r' = 'mp3') {
     if (isDownloading.value) return
     isDownloading.value = true
 
