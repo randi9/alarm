@@ -16,13 +16,15 @@
 
         <!-- Download button (appears after countdown) -->
         <div v-if="isComplete" class="download-page__ready">
-          <button
+          <a
+            :href="ringtone.audio_url"
+            :download="`${ringtone.slug}.mp3`"
             class="btn btn-download download-page__btn"
-            @click="handleDownload('mp3')"
             id="final-download-btn"
+            @click="onManualDownload"
           >
             <Icon icon="mdi:download" /> Download Sekarang (MP3)
-          </button>
+          </a>
           <button
             v-if="format === 'm4r'"
             class="btn btn-download download-page__btn download-page__btn--m4r"
@@ -95,7 +97,13 @@ function onCountdownComplete() {
 function handleDownload(fmt: 'mp3' | 'm4r') {
   if (ringtone.value) {
     triggerDownload(ringtone.value, fmt)
-    // Optionally increment download count via API
+    api.incrementDownload(ringtone.value.slug).catch(console.error)
+  }
+}
+
+function onManualDownload() {
+  // Increment download count when user clicks the manual button
+  if (ringtone.value) {
     api.incrementDownload(ringtone.value.slug).catch(console.error)
   }
 }

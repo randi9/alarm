@@ -33,16 +33,8 @@ export function useDownload() {
         ringtone.downloads += 1
       }
     } catch (err) {
-      console.error('Download error:', err)
-      // Fallback: direct navigation to audio URL (will play/download depending on browser)
-      const link = document.createElement('a')
-      link.href = ringtone.audio_url
-      link.download = `${ringtone.slug}.mp3`
-      link.target = '_self'
-      link.style.display = 'none'
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+      console.error('Auto-download failed:', err)
+      // Don't navigate away — user can click the manual download button
     } finally {
       isDownloading.value = false
     }
