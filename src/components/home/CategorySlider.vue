@@ -73,7 +73,6 @@ onMounted(async () => {
   flex-shrink: 0;
   width: 140px;
   padding: var(--space-lg) var(--space-md) !important;
-  border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -82,12 +81,9 @@ onMounted(async () => {
   transition: all var(--transition-base);
   text-align: center;
   cursor: pointer;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 1px 4px var(--card-shadow);
 }
 
 .category-slider__card:hover {
-  background: var(--card-bg-hover);
   border-color: color-mix(in srgb, var(--cat-color) 30%, transparent);
   transform: translateY(-6px);
   box-shadow: 0 12px 30px color-mix(in srgb, var(--cat-color) 15%, transparent);
