@@ -43,6 +43,9 @@
             </div>
           </div>
 
+          <!-- Affiliate -->
+          <AffiliateSection v-if="ringtone.affiliate_url" :url="ringtone.affiliate_url" />
+
           <!-- Ad -->
           <AdPlaceholder size="default" id="ad-detail-1" />
 
@@ -75,6 +78,7 @@ import RingtonePlayer from '../components/ringtone/RingtonePlayer.vue'
 import RingtoneGrid from '../components/ringtone/RingtoneGrid.vue'
 import CategoryBadge from '../components/ringtone/CategoryBadge.vue'
 import ShareButtons from '../components/shared/ShareButtons.vue'
+import AffiliateSection from '../components/download/AffiliateSection.vue'
 import AdPlaceholder from '../components/shared/AdPlaceholder.vue'
 import AppFooter from '../components/layout/AppFooter.vue'
 

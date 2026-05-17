@@ -40,7 +40,7 @@
 
         <!-- Affiliate (shown during countdown) -->
         <div v-if="!isComplete" class="download-page__affiliate">
-          <AffiliateSection />
+          <AffiliateSection :url="ringtone.affiliate_url || undefined" />
         </div>
 
         <!-- Ad -->

@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS ringtones (
     is_featured     INTEGER NOT NULL DEFAULT 0,
     is_trending     INTEGER NOT NULL DEFAULT 0,
     is_premium      INTEGER NOT NULL DEFAULT 0,
+    affiliate_url   TEXT NOT NULL DEFAULT '',
     status          TEXT NOT NULL DEFAULT 'published',
     created_at      TEXT NOT NULL DEFAULT (datetime('now')),
     updated_at      TEXT NOT NULL DEFAULT (datetime('now')),

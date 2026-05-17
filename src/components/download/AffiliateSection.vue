@@ -2,17 +2,15 @@
   <div class="affiliate" id="affiliate-section">
     <div class="affiliate__banner">
       <div class="affiliate__icon-wrap">
-        <Icon icon="mdi:headphones" class="affiliate__icon" />
+        <Icon :icon="icon" class="affiliate__icon" />
       </div>
       <div class="affiliate__content">
-        <h3 class="affiliate__title">Biar alarm-nya makin kenceng, pakai speaker ini!</h3>
-        <p class="affiliate__desc">
-          Speaker Bluetooth portable terlaris di Shopee. Suara jernih, bass mantap, harga terjangkau!
-        </p>
+        <h3 class="affiliate__title">{{ title }}</h3>
+        <p class="affiliate__desc">{{ description }}</p>
         <a
-          href="https://shope.ee/placeholder-affiliate"
+          :href="url"
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
           class="affiliate__btn"
           id="affiliate-link"
         >
@@ -25,6 +23,18 @@
 
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
+
+withDefaults(defineProps<{
+  url?: string
+  title?: string
+  description?: string
+  icon?: string
+}>(), {
+  url: 'https://shope.ee/placeholder-affiliate',
+  title: 'Biar alarm-nya makin kenceng, pakai speaker ini!',
+  description: 'Speaker Bluetooth portable terlaris di Shopee. Suara jernih, bass mantap, harga terjangkau!',
+  icon: 'mdi:headphones'
+})
 </script>
 
 <style scoped>

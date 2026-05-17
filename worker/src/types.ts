@@ -36,6 +36,7 @@ export interface RingtoneRow {
   is_featured: number
   is_trending: number
   is_premium: number
+  affiliate_url: string
   status: string
   created_at: string
   updated_at: string
@@ -74,6 +75,7 @@ export interface RingtoneCreateInput {
   is_featured?: boolean
   is_trending?: boolean
   is_premium?: boolean
+  affiliate_url?: string
 }
 
 export interface RingtoneUpdateInput {
@@ -87,6 +89,7 @@ export interface RingtoneUpdateInput {
   is_featured?: boolean
   is_trending?: boolean
   is_premium?: boolean
+  affiliate_url?: string
   status?: string
 }
 

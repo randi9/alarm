@@ -171,8 +171,8 @@ export async function createRingtone(req: Request, env: Env): Promise<Response> 
   await env.DB.prepare(`
     INSERT INTO ringtones (slug, title, category_slug, description, duration,
       duration_ms, audio_filename, audio_url, file_size, mime_type,
-      is_featured, is_trending, is_premium, status)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      is_featured, is_trending, is_premium, affiliate_url, status)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `).bind(
     slug, metadata.title, metadata.category_slug,
     metadata.description || '', metadata.duration || '0:00',
@@ -181,6 +181,7 @@ export async function createRingtone(req: Request, env: Env): Promise<Response> 
     metadata.is_featured ? 1 : 0,
     metadata.is_trending ? 1 : 0,
     metadata.is_premium ? 1 : 0,
+    metadata.affiliate_url || '',
     metadata.status || 'published'
   ).run()
 
@@ -206,7 +207,7 @@ export async function updateRingtone(slug: string, req: Request, env: Env): Prom
     const updates: string[] = []
     const params: any[] = []
 
-    const allowedFields = ['title', 'category_slug', 'description', 'duration', 'duration_ms', 'rating', 'is_featured', 'is_trending', 'is_premium', 'status']
+    const allowedFields = ['title', 'category_slug', 'description', 'duration', 'duration_ms', 'rating', 'is_featured', 'is_trending', 'is_premium', 'affiliate_url', 'status']
     
     for (const field of allowedFields) {
       if (data[field] !== undefined) {
