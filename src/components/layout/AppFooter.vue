@@ -6,9 +6,9 @@
         <div class="footer__brand">
           <div class="footer__logo">
             <Icon icon="mdi:bell-ring" class="footer__logo-icon" />
-            <span class="footer__logo-text">BunYing</span>
+            <span class="footer__logo-text">Alarmu</span>
           </div>
-          <p class="footer__tagline">Alarm & Ringtone Paling Ngeselin se-Indonesia</p>
+          <p class="footer__tagline">Bangun Lebih Seru, Mulai dari Alarm!</p>
           <p class="footer__desc">Platform download ringtone dan alarm unik gratis. Dijamin bikin pagi kamu lebih seru!</p>
         </div>
 
@@ -48,8 +48,8 @@
               </a>
             </li>
             <li>
-              <a href="mailto:halo@bunying.id">
-                <Icon icon="mdi:email-outline" class="footer__cat-icon" /> halo@bunying.id
+              <a href="mailto:halo@alarmu.id">
+                <Icon icon="mdi:email-outline" class="footer__cat-icon" /> halo@alarmu.id
               </a>
             </li>
           </ul>
@@ -57,7 +57,7 @@
       </div>
 
       <div class="footer__bottom">
-        <p>&copy; {{ currentYear }} BunYing. All rights reserved.</p>
+        <p>&copy; {{ currentYear }} Alarmu. All rights reserved.</p>
         <p class="footer__made">Made with <Icon icon="mdi:heart" class="footer__heart" /> di Indonesia</p>
       </div>
     </div>
@@ -82,8 +82,8 @@ onMounted(async () => {
 
 <style scoped>
 .footer {
-  background: #F1F5F9;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  background: var(--footer-bg);
+  border-top: 1px solid var(--footer-border);
   padding: var(--space-3xl) 0 var(--space-xl);
   margin-top: var(--space-3xl);
 }
@@ -117,10 +117,7 @@ onMounted(async () => {
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: 1.4rem;
-  background: linear-gradient(135deg, var(--primary-start), var(--primary-end));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary);
 }
 
 .footer__tagline {
@@ -171,7 +168,7 @@ onMounted(async () => {
 .footer__bottom {
   margin-top: var(--space-2xl);
   padding-top: var(--space-xl);
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-top: 1px solid var(--footer-divider);
   display: flex;
   align-items: center;
   justify-content: space-between;

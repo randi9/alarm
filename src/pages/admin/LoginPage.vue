@@ -3,7 +3,7 @@
     <div class="login-card">
       <div class="login-header">
         <Icon icon="mdi:bell-ring" class="login-icon" />
-        <h1>BunYing Admin</h1>
+        <h1>Alarmu Admin</h1>
         <p>Silakan login untuk mengelola konten</p>
       </div>
 
@@ -142,7 +142,7 @@ async function handleLogin() {
 .form-input:focus {
   outline: none;
   border-color: var(--primary-start);
-  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+  box-shadow: 0 0 0 2px rgba(198, 253, 1, 0.2);
 }
 
 .login-error {

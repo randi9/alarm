@@ -50,21 +50,21 @@ defineExpose({ focus: () => inputRef.value?.focus() })
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--search-bg);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--search-border);
   border-radius: var(--radius-xl);
   padding: 0.6rem var(--space-lg);
   transition: all var(--transition-base);
   max-width: 500px;
   width: 100%;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 10px var(--card-shadow);
 }
 
 .search-bar--focused {
   border-color: var(--primary-start);
-  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1), 0 4px 16px rgba(0, 0, 0, 0.06);
-  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 0 3px rgba(198, 253, 1, 0.1), 0 4px 16px var(--card-shadow);
+  background: var(--search-bg-focus);
 }
 
 .search-bar__icon {
@@ -99,7 +99,7 @@ defineExpose({ focus: () => inputRef.value?.focus() })
 }
 
 .search-bar__clear:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: var(--glass-bg);
   color: var(--text-primary);
 }
 </style>

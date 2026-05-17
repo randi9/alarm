@@ -101,7 +101,7 @@ function handleDownload(fmt: 'mp3' | 'm4r') {
 }
 
 function getConfettiStyle(i: number) {
-  const colors = ['#7C3AED', '#2563EB', '#10B981', '#F59E0B', '#EF4444', '#EC4899']
+  const colors = ['#C6FD01', '#98C400', '#10B981', '#F59E0B', '#EF4444', '#EC4899']
   return {
     left: `${Math.random() * 100}%`,
     backgroundColor: colors[i % colors.length],
@@ -163,7 +163,7 @@ function getConfettiStyle(i: number) {
 }
 
 .download-page__btn--m4r {
-  background: linear-gradient(135deg, #3B82F6, #2563EB);
+  background: linear-gradient(135deg, #3B82F6, #98C400);
 }
 
 .download-page__success-text {

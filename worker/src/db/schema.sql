@@ -1,5 +1,5 @@
--- BunYing D1 Schema
--- Run: wrangler d1 execute bunying-db --file=src/db/schema.sql
+-- Alarmu D1 Schema
+-- Run: wrangler d1 execute alarmu-db --file=src/db/schema.sql
 
 -- Categories table
 CREATE TABLE IF NOT EXISTS categories (
@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS categories (
     slug        TEXT NOT NULL UNIQUE,
     label       TEXT NOT NULL,
     icon        TEXT NOT NULL DEFAULT 'mdi:music-note',
-    color       TEXT NOT NULL DEFAULT '#6D28D9',
+    color       TEXT NOT NULL DEFAULT '#7A9D00',
     description TEXT NOT NULL DEFAULT '',
     sort_order  INTEGER NOT NULL DEFAULT 0,
     created_at  TEXT NOT NULL DEFAULT (datetime('now')),

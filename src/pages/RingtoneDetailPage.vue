@@ -133,7 +133,7 @@ function formatDownloads(count: number): string {
 
 watch(ringtone, (newVal) => {
   if (newVal) {
-    document.title = `${newVal.title} — BunYing`
+    document.title = `${newVal.title} — Alarmu`
     const meta = document.querySelector('meta[name="description"]')
     if (meta) meta.setAttribute('content', newVal.description)
   }
@@ -210,7 +210,7 @@ watch(ringtone, (newVal) => {
 }
 
 .btn-download--m4r {
-  background: linear-gradient(135deg, #3B82F6, #2563EB);
+  background: linear-gradient(135deg, #3B82F6, #98C400);
 }
 
 .btn-download--m4r:hover {

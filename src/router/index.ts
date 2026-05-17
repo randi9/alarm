@@ -11,43 +11,43 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: () => import('../pages/HomePage.vue'),
-      meta: { title: 'BunYing — Alarm & Ringtone Paling Ngeselin se-Indonesia' }
+      meta: { title: 'Alarmu — Bangun Lebih Seru, Mulai dari Alarm!' }
     },
     {
       path: '/kategori/:slug',
       name: 'category',
       component: () => import('../pages/CategoryPage.vue'),
-      meta: { title: 'Kategori — BunYing' }
+      meta: { title: 'Kategori — Alarmu' }
     },
     {
       path: '/ringtone/:id',
       name: 'ringtone-detail',
       component: () => import('../pages/RingtoneDetailPage.vue'),
-      meta: { title: 'Ringtone — BunYing' }
+      meta: { title: 'Ringtone — Alarmu' }
     },
     {
       path: '/download/:id',
       name: 'download',
       component: () => import('../pages/DownloadPage.vue'),
-      meta: { title: 'Download — BunYing' }
+      meta: { title: 'Download — Alarmu' }
     },
     {
       path: '/tentang',
       name: 'about',
       component: () => import('../pages/AboutPage.vue'),
-      meta: { title: 'Tentang — BunYing' }
+      meta: { title: 'Tentang — Alarmu' }
     },
     {
       path: '/privasi',
       name: 'privacy',
       component: () => import('../pages/PrivacyPage.vue'),
-      meta: { title: 'Kebijakan Privasi — BunYing' }
+      meta: { title: 'Kebijakan Privasi — Alarmu' }
     },
     {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: () => import('../pages/NotFoundPage.vue'),
-      meta: { title: '404 — BunYing' }
+      meta: { title: '404 — Alarmu' }
     },
     {
       path: '/admin',
@@ -58,19 +58,19 @@ const router = createRouter({
           path: '',
           name: 'admin-dashboard',
           component: () => import('../pages/admin/DashboardPage.vue'),
-          meta: { title: 'Admin Dashboard — BunYing' }
+          meta: { title: 'Admin Dashboard — Alarmu' }
         },
         {
           path: 'categories',
           name: 'admin-categories',
           component: () => import('../pages/admin/CategoriesPage.vue'),
-          meta: { title: 'Manage Categories — BunYing' }
+          meta: { title: 'Manage Categories — Alarmu' }
         },
         {
           path: 'ringtones',
           name: 'admin-ringtones',
           component: () => import('../pages/admin/RingtonesPage.vue'),
-          meta: { title: 'Manage Ringtones — BunYing' }
+          meta: { title: 'Manage Ringtones — Alarmu' }
         }
       ]
     },
@@ -78,13 +78,13 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: () => import('../pages/admin/LoginPage.vue'),
-      meta: { title: 'Login Admin — BunYing' }
+      meta: { title: 'Login Admin — Alarmu' }
     }
   ]
 })
 
 router.beforeEach((to, _from, next) => {
-  document.title = (to.meta.title as string) || 'BunYing — Alarm & Ringtone Unik'
+  document.title = (to.meta.title as string) || 'Alarmu — Alarm & Ringtone Unik'
 
   const isAuthenticated = !!localStorage.getItem('admin_token')
   

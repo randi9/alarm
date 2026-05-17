@@ -4,7 +4,7 @@
       <!-- Logo -->
       <router-link to="/" class="navbar__logo" id="navbar-logo">
         <Icon icon="mdi:bell-ring" class="navbar__logo-icon" />
-        <span class="navbar__logo-text">BunYing</span>
+        <span class="navbar__logo-text">Alarmu</span>
       </router-link>
 
       <!-- Desktop Menu -->
@@ -35,6 +35,14 @@
 
       <!-- Right side -->
       <div class="navbar__actions">
+        <!-- Dark mode toggle -->
+        <button class="navbar__theme-btn" id="nav-theme-toggle" @click="toggleTheme" :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'">
+          <Transition name="theme-icon" mode="out-in">
+            <Icon v-if="isDark" icon="mdi:weather-sunny" width="20" key="sun" />
+            <Icon v-else icon="mdi:weather-night" width="20" key="moon" />
+          </Transition>
+        </button>
+
         <button class="navbar__search-btn" id="nav-search-btn" @click="$emit('toggleSearch')">
           <Icon icon="mdi:magnify" width="20" />
         </button>
@@ -54,8 +62,11 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { Icon } from '@iconify/vue'
 import { api } from '../../services/api'
+import { useTheme } from '../../composables/useTheme'
 
 defineEmits(['toggleSearch'])
+
+const { isDark, toggleTheme } = useTheme()
 
 const isScrolled = ref(false)
 const isMobileOpen = ref(false)
@@ -97,16 +108,16 @@ onUnmounted(() => {
   height: var(--navbar-height);
   z-index: var(--z-navbar);
   transition: all var(--transition-base);
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--navbar-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid transparent;
 }
 
 .navbar--scrolled {
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--navbar-bg-scrolled);
   border-bottom-color: var(--glass-border);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px var(--navbar-shadow);
 }
 
 .navbar__inner {
@@ -137,10 +148,8 @@ onUnmounted(() => {
 }
 
 .navbar__logo-text {
-  background: linear-gradient(135deg, var(--primary-start), var(--primary-end));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary);
+  font-weight: 800;
 }
 
 /* Menu */
@@ -219,6 +228,7 @@ onUnmounted(() => {
   z-index: 10;
 }
 
+.navbar__theme-btn,
 .navbar__search-btn {
   display: flex;
   align-items: center;
@@ -230,9 +240,28 @@ onUnmounted(() => {
   transition: all var(--transition-fast);
 }
 
+.navbar__theme-btn:hover,
 .navbar__search-btn:hover {
   background: var(--glass-bg);
   color: var(--text-primary);
+}
+
+.navbar__theme-btn:hover {
+  color: var(--accent-orange);
+}
+
+/* Theme icon animation */
+.theme-icon-enter-active,
+.theme-icon-leave-active {
+  transition: all 0.2s ease;
+}
+.theme-icon-enter-from {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+.theme-icon-leave-to {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
 }
 
 /* Hamburger */

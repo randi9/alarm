@@ -90,13 +90,13 @@ function handleProgressClick(e: MouseEvent) {
   left: 0;
   right: 0;
   height: var(--player-height);
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--player-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-top: 1px solid var(--player-border);
   z-index: var(--z-player);
   animation: slide-up 0.4s ease;
-  box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 -2px 20px var(--player-shadow);
 }
 
 .global-player__inner {
@@ -172,7 +172,7 @@ function handleProgressClick(e: MouseEvent) {
 .global-player__progress-bar {
   position: relative;
   height: 4px;
-  background: rgba(0, 0, 0, 0.08);
+  background: var(--progress-track);
   border-radius: 2px;
 }
 

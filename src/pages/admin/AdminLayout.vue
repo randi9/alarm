@@ -4,7 +4,7 @@
     <aside class="admin-sidebar" :class="{ 'admin-sidebar--open': isSidebarOpen }">
       <div class="admin-sidebar__header">
         <Icon icon="mdi:bell-ring" class="admin-logo-icon" />
-        <span>BunYing Admin</span>
+        <span>Alarmu Admin</span>
         <button class="admin-close-btn" @click="isSidebarOpen = false">
           <Icon icon="mdi:close" />
         </button>

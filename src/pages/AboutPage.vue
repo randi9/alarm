@@ -4,8 +4,8 @@
       <div class="about-page">
         <header class="about-hero">
           <Icon icon="mdi:bell-ring" class="about-hero__icon" />
-          <h1 class="about-hero__title">Tentang <span class="gradient-text">BunYing</span></h1>
-          <p class="about-hero__tagline">Alarm & Ringtone Paling Ngeselin se-Indonesia</p>
+          <h1 class="about-hero__title">Tentang <span class="gradient-text">Alarmu</span></h1>
+          <p class="about-hero__tagline">Bangun Lebih Seru, Mulai dari Alarm!</p>
         </header>
 
         <section class="about-section">
@@ -14,7 +14,7 @@
             <strong>Bikin pagi kamu lebih seru dengan alarm yang nggak biasa.</strong>
           </p>
           <p>
-            BunYing lahir dari keresahan sederhana: alarm biasa udah nggak mempan buat bangunin kita.
+            Alarmu lahir dari keresahan sederhana: alarm biasa udah nggak mempan buat bangunin kita.
             Makanya kami bikin koleksi alarm dan ringtone yang unik, lucu, dan dijamin bikin kamu
             langsung melek — mulai dari suara emak marah, motivasi toxic, sampai waifu anime yang
             bangunin kamu tiap pagi.
@@ -22,14 +22,14 @@
         </section>
 
         <section class="about-section">
-          <h2><Icon icon="mdi:book-open-page-variant-outline" class="about-section-icon" /> Cerita BunYing</h2>
+          <h2><Icon icon="mdi:book-open-page-variant-outline" class="about-section-icon" /> Cerita Alarmu</h2>
           <p>
-            Nama "BunYing" berasal dari gabungan kata <strong>"Bunyi"</strong> dan <strong>"Ring"</strong>.
+            Nama "Alarmu" berasal dari gabungan kata <strong>"Bunyi"</strong> dan <strong>"Ring"</strong>.
             Kami percaya bahwa alarm yang tepat bisa mengubah pagi kamu — dan akhirnya mengubah hari kamu juga.
           </p>
           <p>
             Dimulai dari iseng bikin alarm suara emak buat grup WhatsApp, ternyata banyak yang suka dan minta
-            lebih banyak variasi. Dari situlah BunYing lahir sebagai platform download ringtone dan alarm
+            lebih banyak variasi. Dari situlah Alarmu lahir sebagai platform download ringtone dan alarm
             gratis untuk seluruh Indonesia.
           </p>
         </section>
@@ -37,21 +37,21 @@
         <section class="about-section">
           <h2><Icon icon="mdi:email-fast-outline" class="about-section-icon" /> Kontak Kami</h2>
           <div class="about-contacts">
-            <a href="mailto:halo@bunying.id" class="about-contact">
+            <a href="mailto:halo@alarmu.id" class="about-contact">
               <Icon icon="mdi:email-outline" class="about-contact__icon" />
-              <span>halo@bunying.id</span>
+              <span>halo@alarmu.id</span>
             </a>
             <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="about-contact">
               <Icon icon="mdi:whatsapp" class="about-contact__icon" />
               <span>WhatsApp</span>
             </a>
-            <a href="https://instagram.com/bunying.id" target="_blank" rel="noopener" class="about-contact">
+            <a href="https://instagram.com/alarmu.id" target="_blank" rel="noopener" class="about-contact">
               <Icon icon="mdi:instagram" class="about-contact__icon" />
-              <span>@bunying.id</span>
+              <span>@alarmu.id</span>
             </a>
-            <a href="https://tiktok.com/@bunying.id" target="_blank" rel="noopener" class="about-contact">
+            <a href="https://tiktok.com/@alarmu.id" target="_blank" rel="noopener" class="about-contact">
               <Icon icon="ic:baseline-tiktok" class="about-contact__icon" />
-              <span>@bunying.id</span>
+              <span>@alarmu.id</span>
             </a>
           </div>
         </section>
@@ -150,7 +150,7 @@ import AppFooter from '../components/layout/AppFooter.vue'
 
 .about-contact:hover {
   transform: translateY(-2px);
-  border-color: rgba(124, 58, 237, 0.3);
+  border-color: rgba(198, 253, 1, 0.3);
   color: var(--text-primary);
 }
 

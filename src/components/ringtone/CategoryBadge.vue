@@ -19,11 +19,11 @@ const props = defineProps<{
 const iconName = computed(() => props.icon || 'mdi:music-note')
 
 const bgColor = computed(() => {
-  const c = props.color || '#6D28D9'
+  const c = props.color || '#7A9D00'
   return c + '20'
 })
 
-const textColor = computed(() => props.color || '#6D28D9')
+const textColor = computed(() => props.color || '#7A9D00')
 </script>
 
 <style scoped>

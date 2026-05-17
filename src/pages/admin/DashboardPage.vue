@@ -2,12 +2,12 @@
   <div class="dashboard-page">
     <div class="admin-header">
       <h1 class="admin-title">Dashboard</h1>
-      <p class="admin-subtitle">Welcome back to BunYing Admin</p>
+      <p class="admin-subtitle">Welcome back to Alarmu Admin</p>
     </div>
 
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-card__icon" style="background: rgba(124, 58, 237, 0.1); color: var(--primary-start);">
+        <div class="stat-card__icon" style="background: rgba(198, 253, 1, 0.1); color: var(--primary-start);">
           <Icon icon="mdi:music-note" />
         </div>
         <div class="stat-card__info">

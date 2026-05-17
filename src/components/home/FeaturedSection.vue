@@ -1,7 +1,7 @@
 <template>
   <section class="featured section" id="featured-section">
     <div class="container">
-      <div class="featured__header">
+      <div class="featured__header liquid-glass-card">
         <h2 class="section-title"><Icon icon="mdi:star-shooting" class="section-icon" /> Ringtone Minggu Ini</h2>
         <p class="section-subtitle">Pilihan terpopuler yang lagi viral</p>
       </div>
@@ -12,10 +12,10 @@
           :to="`/ringtone/${ringtone.id}`"
           class="featured__card"
         >
-          <div class="featured__card-bg" :style="{ '--cat-color': ringtone.category_color || '#6D28D9' }"></div>
+          <div class="featured__card-bg" :style="{ '--cat-color': ringtone.category_color || '#7A9D00' }"></div>
           <div class="featured__card-content">
-            <div class="featured__icon-wrap" :style="{ background: `linear-gradient(135deg, ${ringtone.category_color || '#6D28D9'}25, ${ringtone.category_color || '#6D28D9'}08)` }">
-              <Icon :icon="ringtone.category_icon || 'mdi:music-note'" class="featured__cat-icon" :style="{ color: ringtone.category_color || '#6D28D9' }" />
+            <div class="featured__icon-wrap" :style="{ background: `linear-gradient(135deg, ${ringtone.category_color || '#7A9D00'}25, ${ringtone.category_color || '#7A9D00'}08)` }">
+              <Icon :icon="ringtone.category_icon || 'mdi:music-note'" class="featured__cat-icon" :style="{ color: ringtone.category_color || '#7A9D00' }" />
             </div>
             <h3 class="featured__title">{{ ringtone.title }}</h3>
             <p class="featured__desc">{{ ringtone.description }}</p>
@@ -96,20 +96,20 @@ function handlePlay(ringtone: any) {
   position: relative;
   border-radius: var(--radius-xl);
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--card-bg);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--card-border);
   transition: all var(--transition-base);
   min-height: 260px;
   display: flex;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 8px var(--card-shadow);
 }
 
 .featured__card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
-  border-color: rgba(124, 58, 237, 0.15);
-  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 16px 40px var(--card-shadow-hover);
+  border-color: rgba(198, 253, 1, 0.15);
+  background: var(--card-bg-hover);
 }
 
 .featured__card-bg {

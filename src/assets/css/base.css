@@ -22,6 +22,7 @@ body {
   line-height: 1.6;
   min-height: 100vh;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -79,8 +80,8 @@ ul, ol {
 
 /* Selection */
 ::selection {
-  background: rgba(124, 58, 237, 0.3);
-  color: var(--text-primary);
+  background: rgba(198, 253, 1, 0.3);
+  color: #fff;
 }
 
 /* Container */
@@ -97,12 +98,9 @@ ul, ol {
   }
 }
 
-/* Gradient Text */
+/* Brand accent text */
 .gradient-text {
-  background: linear-gradient(135deg, var(--primary-start), var(--primary-end));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary);
 }
 
 /* Glass Card */

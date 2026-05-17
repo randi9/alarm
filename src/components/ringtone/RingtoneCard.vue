@@ -73,10 +73,10 @@ const isCurrentPlaying = computed(() =>
 )
 
 const catIcon = computed(() => props.ringtone.category_icon || 'mdi:volume-high')
-const catColor = computed(() => props.ringtone.category_color || '#6D28D9')
+const catColor = computed(() => props.ringtone.category_color || '#7A9D00')
 
 const iconBg = computed(() => {
-  const color = props.ringtone.category_color || '#6D28D9'
+  const color = props.ringtone.category_color || '#7A9D00'
   return `linear-gradient(135deg, ${color}30, ${color}10)`
 })
 
@@ -99,21 +99,21 @@ function handlePlay() {
 .ringtone-card {
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--card-bg);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius-lg);
   padding: var(--space-md);
   transition: all var(--transition-base);
   gap: var(--space-sm);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 1px 4px var(--card-shadow);
 }
 
 .ringtone-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.1);
-  border-color: rgba(124, 58, 237, 0.15);
-  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 25px var(--card-shadow-hover);
+  border-color: rgba(198, 253, 1, 0.15);
+  background: var(--card-bg-hover);
 }
 
 .ringtone-card__link {
@@ -220,12 +220,12 @@ function handlePlay() {
   align-items: center;
   justify-content: center;
   transition: all var(--transition-fast);
-  box-shadow: 0 3px 10px rgba(124, 58, 237, 0.2);
+  box-shadow: 0 3px 10px rgba(198, 253, 1, 0.2);
 }
 
 .ringtone-card__play:hover {
   transform: scale(1.12);
-  box-shadow: 0 5px 18px rgba(124, 58, 237, 0.3);
+  box-shadow: 0 5px 18px rgba(198, 253, 1, 0.3);
 }
 
 .ringtone-card__play--active {

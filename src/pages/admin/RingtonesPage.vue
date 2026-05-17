@@ -492,7 +492,7 @@ async function confirmDelete(ringtone: any) {
   color: var(--text-secondary);
 }
 
-.btn-play:hover { background: rgba(124, 58, 237, 0.1); color: var(--primary-start); }
+.btn-play:hover { background: rgba(198, 253, 1, 0.1); color: var(--primary-start); }
 .btn-edit:hover { background: rgba(59, 130, 246, 0.1); color: #3B82F6; }
 .btn-delete:hover { background: rgba(239, 68, 68, 0.1); color: #EF4444; }
 
@@ -567,7 +567,7 @@ async function confirmDelete(ringtone: any) {
 .form-input:focus {
   outline: none;
   border-color: var(--primary-start);
-  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+  box-shadow: 0 0 0 2px rgba(198, 253, 1, 0.2);
 }
 
 .form-checkbox {

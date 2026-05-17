@@ -1,7 +1,7 @@
 <template>
   <section class="category-slider section" id="category-section">
     <div class="container">
-      <div class="category-slider__header">
+      <div class="category-slider__header liquid-glass-card">
         <h2 class="section-title"><Icon icon="mdi:folder-open-outline" class="section-icon" /> Jelajahi Kategori</h2>
         <p class="section-subtitle">Temukan ringtone berdasarkan kategori favoritmu</p>
       </div>
@@ -74,8 +74,8 @@ onMounted(async () => {
   width: 140px;
   padding: var(--space-lg) var(--space-md);
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -85,11 +85,11 @@ onMounted(async () => {
   text-align: center;
   cursor: pointer;
   backdrop-filter: blur(8px);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 1px 4px var(--card-shadow);
 }
 
 .category-slider__card:hover {
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--card-bg-hover);
   border-color: color-mix(in srgb, var(--cat-color) 30%, transparent);
   transform: translateY(-6px);
   box-shadow: 0 12px 30px color-mix(in srgb, var(--cat-color) 15%, transparent);

@@ -39,12 +39,12 @@ const copied = ref(false)
 const currentUrl = computed(() => props.url || window.location.href)
 
 const waUrl = computed(() => {
-  const text = `Cek ringtone "${props.title}" di BunYing! ${currentUrl.value}`
+  const text = `Cek ringtone "${props.title}" di Alarmu! ${currentUrl.value}`
   return `https://wa.me/?text=${encodeURIComponent(text)}`
 })
 
 const twitterUrl = computed(() => {
-  const text = `Cek ringtone "${props.title}" di BunYing!`
+  const text = `Cek ringtone "${props.title}" di Alarmu!`
   return `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(currentUrl.value)}`
 })
 

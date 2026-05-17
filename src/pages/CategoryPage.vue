@@ -3,7 +3,7 @@
     <div class="container">
       <BreadcrumbNav :items="breadcrumbs" />
 
-      <header class="category-header" v-if="category">
+      <header class="category-header liquid-glass-card" v-if="category">
         <div class="category-header__icon">
           <Icon :icon="category.icon" class="category-header__icon-svg" :style="{ color: category.color }" />
         </div>
@@ -75,7 +75,7 @@ watch(() => route.params.slug, () => {
 
 watch(category, (newVal) => {
   if (newVal) {
-    document.title = `${newVal.label} — BunYing`
+    document.title = `${newVal.label} — Alarmu`
   }
 })
 </script>

@@ -1,8 +1,8 @@
 :root {
   /* Primary gradient */
-  --primary-start: #7C3AED;
-  --primary-end: #2563EB;
-  --primary: #6D28D9;
+  --primary-start: #C6FD01;
+  --primary-end: #98C400;
+  --primary: #7A9D00;
 
   /* Background (light mode) */
   --bg-primary: #F8FAFC;
@@ -66,8 +66,8 @@
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.1);
-  --shadow-glow: 0 0 30px rgba(124, 58, 237, 0.15);
-  --shadow-glow-strong: 0 0 60px rgba(124, 58, 237, 0.2);
+  --shadow-glow: 0 0 30px rgba(198, 253, 1, 0.15);
+  --shadow-glow-strong: 0 0 60px rgba(198, 253, 1, 0.2);
 
   /* Transitions */
   --transition-fast: 0.15s ease;
@@ -84,4 +84,109 @@
   --container-max: 1200px;
   --navbar-height: 64px;
   --player-height: 72px;
+
+  /* Hero specific */
+  --hero-bg: linear-gradient(160deg, #F8FAFC 0%, #F1F5F9 40%, #E2E8F0 80%, #F8FAFC 100%);
+  --hero-mesh-color: rgba(0, 0, 0, 0.06);
+  --hero-badge-bg: rgba(198, 253, 1, 0.1);
+  --hero-badge-border: rgba(198, 253, 1, 0.2);
+
+  /* Footer */
+  --footer-bg: #F1F5F9;
+  --footer-border: rgba(0, 0, 0, 0.05);
+  --footer-divider: rgba(0, 0, 0, 0.06);
+
+  /* Navbar */
+  --navbar-bg: rgba(255, 255, 255, 0.6);
+  --navbar-bg-scrolled: rgba(255, 255, 255, 0.9);
+  --navbar-shadow: rgba(0, 0, 0, 0.05);
+
+  /* Input / Search */
+  --search-bg: rgba(255, 255, 255, 0.8);
+  --search-bg-focus: rgba(255, 255, 255, 0.95);
+  --search-border: rgba(0, 0, 0, 0.06);
+
+  /* Cards */
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-bg-hover: rgba(255, 255, 255, 0.95);
+  --card-border: rgba(0, 0, 0, 0.04);
+  --card-shadow: rgba(0, 0, 0, 0.03);
+  --card-shadow-hover: rgba(198, 253, 1, 0.1);
+
+  /* Player */
+  --player-bg: rgba(255, 255, 255, 0.92);
+  --player-border: rgba(0, 0, 0, 0.06);
+  --player-shadow: rgba(0, 0, 0, 0.05);
+  --progress-track: rgba(0, 0, 0, 0.08);
+
+  /* Sort select */
+  --select-bg: rgba(255, 255, 255, 0.8);
+  --select-border: rgba(0, 0, 0, 0.08);
+  --select-option-bg: white;
+}
+
+/* ============ DARK MODE ============ */
+[data-theme="dark"] {
+  /* Background */
+  --bg-primary: #0B0F19;
+  --bg-secondary: #111827;
+  --bg-card: #1A1F2E;
+  --bg-card-hover: #252B3D;
+  --primary: #C6FD01;
+
+  /* Glass effect */
+  --glass-bg: rgba(30, 37, 56, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-bg-strong: rgba(30, 37, 56, 0.85);
+
+  /* Text */
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+
+  /* Shadows (darker, more colorful) */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 30px rgba(198, 253, 1, 0.25);
+  --shadow-glow-strong: 0 0 60px rgba(198, 253, 1, 0.35);
+
+  /* Hero */
+  --hero-bg: linear-gradient(160deg, #0B0F19 0%, #111827 40%, #0F172A 80%, #0B0F19 100%);
+  --hero-mesh-color: rgba(198, 253, 1, 0.2);
+  --hero-badge-bg: rgba(198, 253, 1, 0.12);
+  --hero-badge-border: rgba(198, 253, 1, 0.2);
+
+  /* Footer */
+  --footer-bg: #0d1117;
+  --footer-border: rgba(255, 255, 255, 0.05);
+  --footer-divider: rgba(255, 255, 255, 0.06);
+
+  /* Navbar */
+  --navbar-bg: rgba(11, 15, 25, 0.7);
+  --navbar-bg-scrolled: rgba(11, 15, 25, 0.92);
+  --navbar-shadow: rgba(0, 0, 0, 0.3);
+
+  /* Input / Search */
+  --search-bg: rgba(30, 37, 56, 0.7);
+  --search-bg-focus: rgba(30, 37, 56, 0.95);
+  --search-border: rgba(255, 255, 255, 0.08);
+
+  /* Cards */
+  --card-bg: rgba(26, 31, 46, 0.7);
+  --card-bg-hover: rgba(26, 31, 46, 0.95);
+  --card-border: rgba(255, 255, 255, 0.04);
+  --card-shadow: rgba(0, 0, 0, 0.15);
+  --card-shadow-hover: rgba(198, 253, 1, 0.2);
+
+  /* Player */
+  --player-bg: rgba(17, 24, 39, 0.95);
+  --player-border: rgba(255, 255, 255, 0.06);
+  --player-shadow: rgba(0, 0, 0, 0.3);
+  --progress-track: rgba(255, 255, 255, 0.08);
+
+  /* Sort select */
+  --select-bg: rgba(30, 37, 56, 0.8);
+  --select-border: rgba(255, 255, 255, 0.08);
+  --select-option-bg: #1A1F2E;
 }

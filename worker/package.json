@@ -1,14 +1,14 @@
 {
-  "name": "bunying-api",
+  "name": "alarmu-api",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
-    "db:migrate": "wrangler d1 execute bunying-db --file=src/db/schema.sql",
-    "db:migrate:local": "wrangler d1 execute bunying-db --file=src/db/schema.sql --local",
-    "db:seed": "wrangler d1 execute bunying-db --file=src/db/seed.sql",
-    "db:seed:local": "wrangler d1 execute bunying-db --file=src/db/seed.sql --local"
+    "db:migrate": "wrangler d1 execute alarmu-db --file=src/db/schema.sql",
+    "db:migrate:local": "wrangler d1 execute alarmu-db --file=src/db/schema.sql --local",
+    "db:seed": "wrangler d1 execute alarmu-db --file=src/db/seed.sql",
+    "db:seed:local": "wrangler d1 execute alarmu-db --file=src/db/seed.sql --local"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250510.0",

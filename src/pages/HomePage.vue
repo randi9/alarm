@@ -6,7 +6,7 @@
     <section class="section" id="ringtone-list-section">
       <div class="container">
         <!-- Sort controls -->
-        <div class="home__controls">
+        <div class="home__controls liquid-glass-card">
           <h2 class="section-title"><Icon icon="mdi:music-note" class="section-icon" /> Semua Ringtone</h2>
           <div class="home__sort">
             <label class="home__sort-label">Urutkan:</label>
@@ -75,8 +75,8 @@ const secondBatch = computed(() => filteredRingtones.value.slice(6))
 }
 
 .home__sort-select {
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: var(--select-bg);
+  border: 1px solid var(--select-border);
   border-radius: var(--radius-md);
   padding: var(--space-sm) var(--space-md);
   color: var(--text-primary);
@@ -84,15 +84,15 @@ const secondBatch = computed(() => filteredRingtones.value.slice(6))
   cursor: pointer;
   outline: none;
   transition: all var(--transition-fast);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 3px var(--card-shadow);
 }
 
 .home__sort-select:focus {
   border-color: var(--primary-start);
-  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+  box-shadow: 0 0 0 3px rgba(198, 253, 1, 0.1);
 }
 
 .home__sort-select option {
-  background: white;
+  background: var(--select-option-bg);
 }
 </style>

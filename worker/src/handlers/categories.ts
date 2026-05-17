@@ -35,7 +35,7 @@ export async function createCategory(req: Request, env: Env): Promise<Response> 
       data.slug, 
       data.label, 
       data.icon || 'mdi:music-note', 
-      data.color || '#6D28D9', 
+      data.color || '#7A9D00', 
       data.description || '', 
       data.sort_order || 0
     ).run()

@@ -8,7 +8,7 @@
         <section>
           <h2>1. Pendahuluan</h2>
           <p>
-            BunYing ("kami", "kita", atau "milik kami") mengoperasikan website bunying.id.
+            Alarmu ("kami", "kita", atau "milik kami") mengoperasikan website alarmu.id.
             Halaman ini menjelaskan kebijakan kami terkait pengumpulan, penggunaan, dan
             pengungkapan informasi pribadi saat Anda menggunakan layanan kami.
           </p>
@@ -88,7 +88,7 @@
             Jika Anda memiliki pertanyaan tentang Kebijakan Privasi ini, silakan hubungi kami:
           </p>
           <ul>
-            <li>Email: halo@bunying.id</li>
+            <li>Email: halo@alarmu.id</li>
             <li>WhatsApp: +62 812-3456-7890</li>
           </ul>
         </section>
@@ -100,7 +100,7 @@
         <section>
           <h2>1. Ketentuan Umum</h2>
           <p>
-            Dengan mengakses dan menggunakan website BunYing, Anda menyetujui untuk terikat
+            Dengan mengakses dan menggunakan website Alarmu, Anda menyetujui untuk terikat
             oleh syarat dan ketentuan ini. Jika Anda tidak setuju dengan bagian mana pun dari
             ketentuan ini, mohon untuk tidak menggunakan layanan kami.
           </p>
@@ -109,7 +109,7 @@
         <section>
           <h2>2. Penggunaan Layanan</h2>
           <p>
-            Semua ringtone dan alarm yang tersedia di BunYing disediakan untuk penggunaan pribadi.
+            Semua ringtone dan alarm yang tersedia di Alarmu disediakan untuk penggunaan pribadi.
             Dilarang mendistribusikan ulang, menjual, atau menggunakan untuk tujuan komersial
             tanpa izin tertulis dari kami.
           </p>

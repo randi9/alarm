@@ -136,10 +136,10 @@
 /* Glow pulse */
 @keyframes glow-pulse {
   0%, 100% {
-    box-shadow: 0 0 5px rgba(124, 58, 237, 0.2);
+    box-shadow: 0 0 5px rgba(198, 253, 1, 0.2);
   }
   50% {
-    box-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
+    box-shadow: 0 0 20px rgba(198, 253, 1, 0.5);
   }
 }
 
