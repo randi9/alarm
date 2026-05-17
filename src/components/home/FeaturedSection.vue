@@ -31,7 +31,7 @@
               <router-link
                 :to="`/download/${ringtone.slug}`"
                 class="featured__download-btn"
-                @click.stop="handleDownloadClick(ringtone)"
+                @click.stop
               >
                 <Icon icon="mdi:download" />
               </router-link>

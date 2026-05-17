@@ -48,7 +48,7 @@
         :to="`/download/${ringtone.slug}`"
         class="ringtone-card__download-btn"
         :id="`download-${ringtone.slug}`"
-        @click.stop="handleDownloadClick"
+        @click.stop
       >
         <Icon icon="mdi:download" width="16" />
       </router-link>
