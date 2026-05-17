@@ -68,27 +68,47 @@ export async function handleRequest(request: Request, env: Env): Promise<Respons
       return withCors(await getCategory(categoryMatch[1], env))
     }
 
-    // Download proxy — serves audio files from R2 with proper headers
+    // Download proxy — serves audio files with Content-Disposition: attachment
     const proxyMatch = pathname.match(/^\/api\/download\/([^/]+)$/)
     if (method === 'GET' && proxyMatch) {
       const slug = proxyMatch[1]
-      // Look up ringtone to get the R2 key
       const row: any = await env.DB.prepare('SELECT audio_url, title FROM ringtones WHERE slug = ?').bind(slug).first()
       if (!row) {
         return withCors(Response.json({ success: false, error: 'Not found' }, { status: 404 }))
       }
-      // Extract R2 key from the full URL (e.g. "https://audio.alarmu.site/ringtones/file.mp3" → "ringtones/file.mp3")
-      const r2Key = row.audio_url.replace(/^https?:\/\/[^/]+\//, '')
-      const object = await env.AUDIO_BUCKET.get(r2Key)
-      if (!object) {
-        return withCors(Response.json({ success: false, error: 'File not found in storage' }, { status: 404 }))
-      }
+
       const filename = `${slug}.mp3`
-      const headers = new Headers(corsHeaders)
-      headers.set('Content-Type', object.httpMetadata?.contentType || 'audio/mpeg')
-      headers.set('Content-Disposition', `attachment; filename="${filename}"`)
-      if (object.size) headers.set('Content-Length', String(object.size))
-      return new Response(object.body, { headers })
+
+      // Try R2 bucket first
+      try {
+        const r2Key = row.audio_url.replace(/^https?:\/\/[^/]+\//, '')
+        const object = await env.AUDIO_BUCKET.get(r2Key)
+        if (object) {
+          const headers = new Headers(corsHeaders)
+          headers.set('Content-Type', object.httpMetadata?.contentType || 'audio/mpeg')
+          headers.set('Content-Disposition', `attachment; filename="${filename}"`)
+          if (object.size) headers.set('Content-Length', String(object.size))
+          return new Response(object.body, { headers })
+        }
+      } catch (_e) {
+        // R2 bucket access failed, fall through to fetch proxy
+      }
+
+      // Fallback: fetch from public URL and proxy with download headers
+      try {
+        const audioResponse = await fetch(row.audio_url)
+        if (!audioResponse.ok) {
+          return withCors(Response.json({ success: false, error: 'File not found' }, { status: 404 }))
+        }
+        const headers = new Headers(corsHeaders)
+        headers.set('Content-Type', audioResponse.headers.get('Content-Type') || 'audio/mpeg')
+        headers.set('Content-Disposition', `attachment; filename="${filename}"`)
+        const contentLength = audioResponse.headers.get('Content-Length')
+        if (contentLength) headers.set('Content-Length', contentLength)
+        return new Response(audioResponse.body, { headers })
+      } catch (_e) {
+        return withCors(Response.json({ success: false, error: 'Download failed' }, { status: 500 }))
+      }
     }
 
     // --- Admin API ---
