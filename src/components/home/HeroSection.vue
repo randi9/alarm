@@ -103,7 +103,7 @@ onUnmounted(() => {
 .hero {
   position: relative;
   background: var(--hero-bg);
-  padding: calc(var(--navbar-height) + var(--space-2xl)) 0 var(--space-3xl);
+  padding: calc(var(--navbar-height) + var(--space-2xl)) 0 calc(var(--space-3xl) + 12vh);
   overflow: hidden;
   min-height: 90vh;
   display: flex;

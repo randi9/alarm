@@ -43,6 +43,7 @@
           :to="`/download/${currentRingtone.slug}`"
           class="global-player__download"
           id="global-player-download"
+          title="Download"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -50,6 +51,14 @@
             <line x1="12" y1="15" x2="12" y2="3" />
           </svg>
         </router-link>
+
+        <!-- Close -->
+        <button class="global-player__close" @click="closePlayer" title="Tutup Player">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
       </div>
 
       <!-- Waveform bars (visual only) -->
@@ -71,6 +80,7 @@ const {
   progress,
   isPlayerVisible,
   toggle,
+  pause,
   seekByPercent,
   formatTime
 } = useAudioPlayer()
@@ -80,6 +90,11 @@ function handleProgressClick(e: MouseEvent) {
   const rect = target.getBoundingClientRect()
   const percent = ((e.clientX - rect.left) / rect.width) * 100
   seekByPercent(percent)
+}
+
+function closePlayer() {
+  pause()
+  isPlayerVisible.value = false
 }
 </script>
 
@@ -222,6 +237,25 @@ function handleProgressClick(e: MouseEvent) {
 
 .global-player__download:hover {
   background: rgba(16, 185, 129, 0.15);
+}
+
+/* Close */
+.global-player__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+  margin-left: -4px;
+}
+
+.global-player__close:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: #EF4444;
 }
 
 /* Waveform */
