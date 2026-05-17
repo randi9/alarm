@@ -42,7 +42,7 @@ const props = defineProps<{
 
 const emit = defineEmits(['complete'])
 
-const totalDuration = props.duration || 10
+const totalDuration = props.duration || 5
 const remaining = ref(totalDuration)
 let intervalId: ReturnType<typeof setInterval> | null = null
 

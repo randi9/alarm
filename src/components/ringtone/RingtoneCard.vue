@@ -1,5 +1,5 @@
 <template>
-  <article class="ringtone-card" :id="`ringtone-card-${ringtone.slug}`">
+  <article class="ringtone-card liquid-glass-card" :id="`ringtone-card-${ringtone.slug}`">
     <router-link :to="`/ringtone/${ringtone.slug}`" class="ringtone-card__link">
       <!-- Icon -->
       <div class="ringtone-card__icon" :style="{ background: iconBg }">
@@ -48,7 +48,7 @@
         :to="`/download/${ringtone.slug}`"
         class="ringtone-card__download-btn"
         :id="`download-${ringtone.slug}`"
-        @click.stop
+        @click.stop="handleDownloadClick"
       >
         <Icon icon="mdi:download" width="16" />
       </router-link>
@@ -92,6 +92,15 @@ const formattedDownloads = computed(() => formatDownloadsLocal(props.ringtone.do
 
 function handlePlay() {
   play(props.ringtone)
+}
+
+function handleDownloadClick() {
+  if (props.ringtone.affiliate_url) {
+    window.open(props.ringtone.affiliate_url, '_blank', 'noopener,noreferrer')
+  } else {
+    // Optionally open a default fallback link
+    window.open('https://shope.ee/placeholder-affiliate', '_blank', 'noopener,noreferrer')
+  }
 }
 </script>
 

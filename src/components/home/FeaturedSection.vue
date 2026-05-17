@@ -8,9 +8,9 @@
       <div class="featured__grid">
         <router-link
           v-for="ringtone in featuredRingtones"
-          :key="ringtone.id"
-          :to="`/ringtone/${ringtone.id}`"
-          class="featured__card"
+          :key="ringtone.slug"
+          :to="`/ringtone/${ringtone.slug}`"
+          class="featured__card liquid-glass-card"
         >
           <div class="featured__card-bg" :style="{ '--cat-color': ringtone.category_color || '#7A9D00' }"></div>
           <div class="featured__card-content">
@@ -24,9 +24,18 @@
               <span><Icon icon="mdi:star" class="fmeta-icon fmeta-icon--star" /> {{ ringtone.rating }}</span>
               <span><Icon icon="mdi:timer-outline" class="fmeta-icon" /> {{ ringtone.duration }}</span>
             </div>
-            <button class="featured__play" @click.prevent="handlePlay(ringtone)">
-              <Icon icon="mdi:play" /> Putar Sekarang
-            </button>
+            <div class="featured__actions">
+              <button class="featured__play" @click.prevent="handlePlay(ringtone)">
+                <Icon icon="mdi:play" /> Putar Sekarang
+              </button>
+              <router-link
+                :to="`/download/${ringtone.slug}`"
+                class="featured__download-btn"
+                @click.stop="handleDownloadClick(ringtone)"
+              >
+                <Icon icon="mdi:download" />
+              </router-link>
+            </div>
           </div>
         </router-link>
       </div>
@@ -60,6 +69,15 @@ function formatDownloads(count: number): string {
 
 function handlePlay(ringtone: any) {
   play(ringtone)
+}
+
+function handleDownloadClick(ringtone: any) {
+  if (ringtone.affiliate_url) {
+    window.open(ringtone.affiliate_url, '_blank', 'noopener,noreferrer')
+  } else {
+    // Optionally open a default fallback link
+    window.open('https://shope.ee/placeholder-affiliate', '_blank', 'noopener,noreferrer')
+  }
 }
 </script>
 
@@ -96,13 +114,9 @@ function handlePlay(ringtone: any) {
   position: relative;
   border-radius: var(--radius-xl);
   overflow: hidden;
-  background: var(--card-bg);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--card-border);
   transition: all var(--transition-base);
   min-height: 260px;
   display: flex;
-  box-shadow: 0 2px 8px var(--card-shadow);
 }
 
 .featured__card:hover {
@@ -194,8 +208,14 @@ function handlePlay(ringtone: any) {
   opacity: 1;
 }
 
-.featured__play {
+.featured__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
   margin-top: var(--space-sm);
+}
+
+.featured__play {
   padding: var(--space-sm) var(--space-md);
   background: linear-gradient(135deg, var(--primary-start), var(--primary-end));
   border-radius: var(--radius-md);
@@ -203,14 +223,32 @@ function handlePlay(ringtone: any) {
   font-weight: 600;
   color: white;
   transition: all var(--transition-base);
-  align-self: flex-start;
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
+  flex: 1;
+  justify-content: center;
 }
 
 .featured__play:hover {
   transform: scale(1.05);
   box-shadow: var(--shadow-glow);
+}
+
+.featured__download-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-green);
+  transition: all var(--transition-base);
+}
+
+.featured__download-btn:hover {
+  background: rgba(16, 185, 129, 0.2);
+  transform: scale(1.05);
 }
 </style>

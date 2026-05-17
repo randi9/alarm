@@ -1,5 +1,5 @@
 <template>
-  <div class="affiliate" id="affiliate-section">
+  <div v-if="false" class="affiliate" id="affiliate-section">
     <div class="affiliate__banner">
       <div class="affiliate__icon-wrap">
         <Icon :icon="icon" class="affiliate__icon" />

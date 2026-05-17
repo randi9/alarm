@@ -1,5 +1,5 @@
 <template>
-  <div class="ad-placeholder" :class="[sizeClass]" :id="id">
+  <div v-if="false" class="ad-placeholder" :class="[sizeClass]" :id="id">
     <div class="ad-placeholder__content">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5">
         <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
