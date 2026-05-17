@@ -16,21 +16,18 @@
 
         <!-- Download button (appears after countdown) -->
         <div v-if="isComplete" class="download-page__ready">
-          <button
-            class="btn btn-download download-page__btn"
-            id="final-download-btn"
-            @click="handleDownload('mp3')"
-          >
-            <Icon icon="mdi:download" /> Download Sekarang (MP3)
-          </button>
-          <button
-            v-if="format === 'm4r'"
-            class="btn btn-download download-page__btn download-page__btn--m4r"
-            @click="handleDownload('m4r')"
-            id="final-download-m4r-btn"
-          >
-            <Icon icon="mdi:apple" /> Download M4R (iPhone)
-          </button>
+          <div class="download-page__actions">
+            <button
+              class="btn btn-download download-page__btn"
+              id="final-download-btn"
+              @click="handleDownload('mp3')"
+            >
+              <Icon icon="mdi:download" /> Download Sekarang
+            </button>
+            <router-link to="/" class="btn btn-outline download-page__btn download-page__btn--secondary">
+              <Icon icon="mdi:music-note" /> Cari Ringtone Lain
+            </router-link>
+          </div>
           <p class="download-page__success-text">
             Download berhasil? Jangan lupa share ke teman!
             <Icon icon="mdi:volume-high" class="dl-share-icon" />
@@ -155,14 +152,33 @@ function getConfettiStyle(i: number) {
   animation: bounce-in 0.5s ease;
 }
 
+.download-page__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  .download-page__actions {
+    flex-direction: row;
+  }
+}
+
 .download-page__btn {
   font-size: 1.1rem;
   padding: var(--space-md) var(--space-2xl);
   border-radius: var(--radius-xl);
+  flex: 1;
 }
 
-.download-page__btn--m4r {
-  background: linear-gradient(135deg, #3B82F6, #98C400);
+.download-page__btn--secondary {
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.download-page__btn--secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .download-page__success-text {

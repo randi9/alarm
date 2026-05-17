@@ -28,12 +28,9 @@
 
             <!-- Download buttons -->
             <div class="detail-info__downloads">
-              <router-link :to="`/download/${ringtone.slug}`" class="btn btn-download" id="download-mp3-btn">
-                <Icon icon="mdi:download" /> Download MP3
-              </router-link>
-              <router-link :to="`/download/${ringtone.slug}?format=m4r`" class="btn btn-download btn-download--m4r" id="download-m4r-btn">
-                <Icon icon="mdi:apple" /> Download M4R (iPhone)
-              </router-link>
+              <button @click="handleDownloadClick" class="btn btn-download" id="download-mp3-btn">
+                <Icon icon="mdi:download" /> Download Ringtone
+              </button>
             </div>
 
             <!-- Share -->
@@ -70,7 +67,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import { api } from '../services/api'
 import BreadcrumbNav from '../components/shared/BreadcrumbNav.vue'
@@ -83,6 +80,7 @@ import AdPlaceholder from '../components/shared/AdPlaceholder.vue'
 import AppFooter from '../components/layout/AppFooter.vue'
 
 const route = useRoute()
+const router = useRouter()
 
 const ringtone = ref<any>(null)
 const similarRingtones = ref<any[]>([])
@@ -133,6 +131,15 @@ function formatDownloads(count: number): string {
     return (count / 1000).toFixed(1).replace(/\.0$/, '') + 'K'
   }
   return count.toString()
+}
+
+function handleDownloadClick() {
+  if (ringtone.value) {
+    if (ringtone.value.affiliate_url) {
+      window.open(ringtone.value.affiliate_url, '_blank', 'noopener,noreferrer')
+    }
+    router.push(`/download/${ringtone.value.slug}`)
+  }
 }
 
 watch(ringtone, (newVal) => {
