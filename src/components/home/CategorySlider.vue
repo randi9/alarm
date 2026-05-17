@@ -10,7 +10,7 @@
           v-for="cat in categories"
           :key="cat.slug"
           :to="`/kategori/${cat.slug}`"
-          class="category-slider__card"
+          class="category-slider__card liquid-glass-card"
           :style="{ '--cat-color': cat.color }"
         >
           <div class="category-slider__icon-wrap" :style="{ background: `linear-gradient(135deg, ${cat.color}20, ${cat.color}08)` }">
@@ -72,10 +72,8 @@ onMounted(async () => {
 .category-slider__card {
   flex-shrink: 0;
   width: 140px;
-  padding: var(--space-lg) var(--space-md);
+  padding: var(--space-lg) var(--space-md) !important;
   border-radius: var(--radius-lg);
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
   display: flex;
   flex-direction: column;
   align-items: center;

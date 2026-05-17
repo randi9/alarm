@@ -112,7 +112,7 @@ function handleDownloadClick() {
   backdrop-filter: blur(8px);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-lg);
-  padding: var(--space-md);
+  padding: var(--space-md) !important;
   transition: all var(--transition-base);
   gap: var(--space-sm);
   box-shadow: 0 1px 4px var(--card-shadow);

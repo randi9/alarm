@@ -117,6 +117,7 @@ function handleDownloadClick(ringtone: any) {
   transition: all var(--transition-base);
   min-height: 260px;
   display: flex;
+  padding: 0 !important;
 }
 
 .featured__card:hover {
